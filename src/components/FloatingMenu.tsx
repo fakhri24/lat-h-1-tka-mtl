@@ -1,300 +1,244 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
-  Grid,
-  BookOpen,
-  Maximize,
-  Minimize,
-  Moon,
-  Sun,
-  Eye,
-  EyeOff,
-  RotateCcw,
-  ZoomIn,
-  ZoomOut,
   ChevronLeft,
   ChevronRight,
+  Menu,
+  Eye,
+  EyeOff,
+  BookOpen,
+  Maximize2,
+  Sun,
+  Moon,
+  Type,
   X,
-  PanelTopClose,
-  FileDown,
 } from 'lucide-react';
-import { UserAnswerState } from '../types/question';
+import { PackageId, Question } from '../types/question';
 
 interface FloatingMenuProps {
+  activePackage: PackageId;
+  onSelectPackage: (pkg: PackageId) => void;
+  questions: Question[];
   currentIndex: number;
-  currentQuestionId: number;
-  questionIds: number[];
-  onSelectQuestionId: (id: number) => void;
-  onPrev: () => void;
-  onNext: () => void;
-  answers: UserAnswerState;
-  fontSizeLevel: number;
-  onChangeFontSize: (delta: number) => void;
-  hideOptions: boolean;
-  onToggleHideOptions: () => void;
+  onSelectIndex: (idx: number) => void;
+  answeredMap: Record<string, boolean>;
+  showAnswer: boolean;
+  onToggleAnswer: () => void;
+  onOpenSolution: () => void;
+  fontSizeLevel: 1 | 2 | 3;
+  onChangeFontSize: (level: 1 | 2 | 3) => void;
   darkMode: boolean;
   onToggleDarkMode: () => void;
-  isFullscreen: boolean;
   onToggleFullscreen: () => void;
-  showSolutionModal: boolean;
-  onToggleSolutionModal: () => void;
-  showAnswerKey: boolean;
-  onToggleAnswerKey: () => void;
-  onResetAllAnswers: () => void;
+  isOpen: boolean;
+  onToggleOpen: () => void;
 }
 
 export const FloatingMenu: React.FC<FloatingMenuProps> = ({
+  questions,
   currentIndex,
-  currentQuestionId,
-  questionIds,
-  onSelectQuestionId,
-  onPrev,
-  onNext,
-  answers,
+  onSelectIndex,
+  answeredMap,
+  showAnswer,
+  onToggleAnswer,
+  onOpenSolution,
   fontSizeLevel,
   onChangeFontSize,
-  hideOptions,
-  onToggleHideOptions,
   darkMode,
   onToggleDarkMode,
-  isFullscreen,
   onToggleFullscreen,
-  showSolutionModal,
-  onToggleSolutionModal,
-  showAnswerKey,
-  onToggleAnswerKey,
-  onResetAllAnswers,
+  isOpen,
+  onToggleOpen,
 }) => {
-  const [showGridModal, setShowGridModal] = useState(false);
-  const totalQuestions = questionIds.length;
+  const menuRef = useRef<HTMLDivElement>(null);
 
-  const answeredCount = Object.keys(answers).filter((idStr) => {
-    const qId = Number(idStr);
-    const ans = answers[qId];
-    if (!ans) return false;
-    if (ans.selectedOption) return true;
-    if (ans.selectedCheckboxes && ans.selectedCheckboxes.length > 0) return true;
-    if (ans.trueFalseAnswers && Object.keys(ans.trueFalseAnswers).length > 0) return true;
-    return false;
-  }).length;
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node)
+      ) {
+        onToggleOpen();
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen, onToggleOpen]);
+
+  const currentQuestion = questions[currentIndex];
+  const hasPrev = currentIndex > 0;
+  const hasNext = currentIndex < questions.length - 1;
 
   return (
-    <>
-      {/* Floating Bottom Control Bar */}
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-auto max-w-[95vw] px-4 py-2.5 rounded-2xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-2xl flex items-center gap-2 sm:gap-3 transition">
-        {/* Tombol Prev */}
+    <div
+      ref={menuRef}
+      className="fixed top-3 right-4 z-40 flex flex-col items-end select-none"
+    >
+      {/* Compact Floating Trigger Bar */}
+      <div className="flex items-center gap-1.5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200/90 dark:border-slate-800 shadow-lg rounded-full px-2.5 py-1.5 transition-all">
         <button
-          onClick={onPrev}
-          disabled={currentIndex === 0}
-          className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 disabled:opacity-30 disabled:pointer-events-none transition text-slate-700 dark:text-slate-200"
+          onClick={() => hasPrev && onSelectIndex(currentIndex - 1)}
+          disabled={!hasPrev}
           title="Soal Sebelumnya (Panah Kiri)"
+          className="p-1.5 rounded-full text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-35 disabled:pointer-events-none transition-colors"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
 
-        {/* Indikator Nomor & Modal Grid */}
         <button
-          onClick={() => setShowGridModal(true)}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-sm hover:bg-indigo-100 dark:hover:bg-indigo-900 transition"
-          title="Buka Kisi Nomor Soal"
+          onClick={onToggleOpen}
+          data-menu-trigger
+          title="Buka Navigasi Soal (Tombol H)"
+          className="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-950/80 text-brand-700 dark:text-brand-300 font-bold text-sm hover:bg-brand-100 dark:hover:bg-brand-900/60 transition-colors"
         >
-          <Grid className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+          <span>SIAGA 2</span>
+          <span className="text-slate-300 dark:text-slate-700">•</span>
           <span>
-            {currentQuestionId} / {totalQuestions}
+            No. {currentQuestion?.number ?? currentIndex + 1} / {questions.length}
           </span>
+          {isOpen ? <X className="w-4 h-4 ml-0.5" /> : <Menu className="w-4 h-4 ml-0.5" />}
         </button>
 
-        {/* Tombol Next */}
         <button
-          onClick={onNext}
-          disabled={currentIndex === totalQuestions - 1}
-          className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 disabled:opacity-30 disabled:pointer-events-none transition text-slate-700 dark:text-slate-200"
-          title="Soal Berikutnya (Panah Kanan)"
+          onClick={() => hasNext && onSelectIndex(currentIndex + 1)}
+          disabled={!hasNext}
+          title="Soal Berikutnya (Panah Kanan / Spasi)"
+          className="p-1.5 rounded-full text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-35 disabled:pointer-events-none transition-colors"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
 
-        <div className="h-6 w-[1px] bg-slate-300 dark:bg-slate-700 hidden sm:block" />
+        <div className="h-5 w-px bg-slate-200 dark:bg-slate-800 mx-0.5" />
 
-        {/* Font Zoom */}
-        <div className="hidden sm:flex items-center gap-1 bg-slate-100 dark:bg-slate-800 rounded-xl p-1">
-          <button
-            onClick={() => onChangeFontSize(-1)}
-            disabled={fontSizeLevel <= 0}
-            className="p-1.5 rounded-lg hover:bg-white dark:hover:bg-slate-700 disabled:opacity-30 transition text-slate-700 dark:text-slate-300"
-            title="Perkecil Ukuran Teks"
-          >
-            <ZoomOut className="w-4 h-4" />
-          </button>
-          <span className="text-xs font-semibold px-1 text-slate-600 dark:text-slate-300">
-            {fontSizeLevel === 0 ? 'Normal' : fontSizeLevel === 1 ? 'Besar' : 'Ekstra'}
-          </span>
-          <button
-            onClick={() => onChangeFontSize(1)}
-            disabled={fontSizeLevel >= 2}
-            className="p-1.5 rounded-lg hover:bg-white dark:hover:bg-slate-700 disabled:opacity-30 transition text-slate-700 dark:text-slate-300"
-            title="Perbesar Ukuran Teks"
-          >
-            <ZoomIn className="w-4 h-4" />
-          </button>
-        </div>
-
-        {/* Sembunyikan Opsi Toggle */}
         <button
-          onClick={onToggleHideOptions}
-          className={`p-2 rounded-xl border transition ${
-            hideOptions
-              ? 'bg-amber-100 dark:bg-amber-950/60 border-amber-300 dark:border-amber-700 text-amber-800 dark:text-amber-300'
-              : 'bg-slate-100 dark:bg-slate-800 border-transparent hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300'
+          onClick={onToggleAnswer}
+          title="Tampilkan Kunci Jawaban (Tombol K)"
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
+            showAnswer
+              ? 'bg-emerald-600 text-white shadow-sm'
+              : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
           }`}
-          title={hideOptions ? 'Tampilkan Pilihan Ganda' : 'Sembunyikan Pilihan Ganda (Mode Eksplorasi)'}
         >
-          {hideOptions ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+          {showAnswer ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+          <span className="hidden sm:inline">Kunci</span>
         </button>
 
-        {/* Kunci Jawaban Cepat */}
         <button
-          onClick={onToggleAnswerKey}
-          className={`hidden sm:flex items-center gap-1 px-2.5 py-1.5 rounded-xl border text-xs font-bold transition ${
-            showAnswerKey
-              ? 'bg-emerald-100 dark:bg-emerald-950/60 border-emerald-300 dark:border-emerald-700 text-emerald-800 dark:text-emerald-300'
-              : 'bg-slate-100 dark:bg-slate-800 border-transparent hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300'
-          }`}
-          title="Tampilkan Kunci Cepat di Pilihan"
+          onClick={onOpenSolution}
+          data-solution-trigger
+          title="Buka Pembahasan Lengkap (Tombol P)"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-sm transition-all"
         >
-          <span>Kunci</span>
-        </button>
-
-        {/* Pembahasan Lengkap Modal Button */}
-        <button
-          onClick={onToggleSolutionModal}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold shadow-sm transition ${
-            showSolutionModal
-              ? 'bg-indigo-600 text-white'
-              : 'bg-indigo-50 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900'
-          }`}
-          title="Buka Pembahasan Lengkap"
-        >
-          <BookOpen className="w-4 h-4" />
+          <BookOpen className="w-3.5 h-3.5" />
           <span className="hidden sm:inline">Pembahasan</span>
-        </button>
-
-        {/* PDF Handout Download */}
-        <a
-          href="/33-Soal-TKA-Matematika-Tingkat-Lanjut-Siaga-2.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition"
-          title="Unduh PDF Naskah Handout (A4 Padat)"
-        >
-          <FileDown className="w-4 h-4 text-rose-600 dark:text-rose-400" />
-          <span className="hidden md:inline">PDF</span>
-        </a>
-
-        {/* Dark Mode */}
-        <button
-          onClick={onToggleDarkMode}
-          className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition"
-          title={darkMode ? 'Beralih ke Terang' : 'Beralih ke Gelap'}
-        >
-          {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-        </button>
-
-        {/* Fullscreen */}
-        <button
-          onClick={onToggleFullscreen}
-          className="hidden sm:block p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition"
-          title={isFullscreen ? 'Keluar Layar Penuh' : 'Mode Layar Penuh (Proyektor)'}
-        >
-          {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
         </button>
       </div>
 
-      {/* Grid Modal Selector */}
-      {showGridModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-xl max-h-[90vh] flex flex-col rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
-            {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-800">
-              <div className="flex items-center gap-2">
-                <Grid className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                  Daftar Nomor Soal (Siaga 2)
-                </h3>
-              </div>
-              <button
-                onClick={() => setShowGridModal(false)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
-              >
-                <X className="w-5 h-5" />
-              </button>
+      {/* Collapsible Popover Drawer */}
+      {isOpen && (
+        <div
+          data-floating-drawer
+          className="mt-2 w-[380px] sm:w-[440px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl p-4 flex flex-col gap-4 transition-all"
+        >
+          {/* Package Info Header */}
+          <div>
+            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5">
+              Paket Latihan H-1 TKA Matematika Tingkat Lanjut
             </div>
-
-            {/* Status ringkasan */}
-            <div className="px-6 py-3 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-600 dark:text-slate-300">
-              <div>
-                Dijawab: <span className="font-bold text-indigo-600 dark:text-indigo-400">{answeredCount}</span> dari{' '}
-                <span className="font-bold">{totalQuestions}</span> soal
-              </div>
-              <button
-                onClick={() => {
-                  if (confirm('Apakah Anda yakin ingin mereset seluruh jawaban yang tersimpan?')) {
-                    onResetAllAnswers();
-                  }
-                }}
-                className="flex items-center gap-1 text-rose-600 hover:text-rose-700 font-semibold"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                <span>Reset Semua Jawaban</span>
-              </button>
+            <div className="px-3 py-2 rounded-xl bg-brand-600 text-white font-bold text-xs flex items-center justify-between shadow-sm">
+              <span>Paket Utama — SIAGA 2 (Matematika Lanjut)</span>
+              <span className="bg-white/20 px-2 py-0.5 rounded-full text-[11px]">
+                {questions.length} Soal
+              </span>
             </div>
+          </div>
 
-            {/* Grid 33 Soal */}
-            <div className="p-6 overflow-y-auto grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 gap-2.5">
-              {questionIds.map((qId) => {
-                const isCurrent = qId === currentQuestionId;
-                const ans = answers[qId];
-                const isAnswered = Boolean(
-                  ans?.selectedOption ||
-                    (ans?.selectedCheckboxes && ans.selectedCheckboxes.length > 0) ||
-                    (ans?.trueFalseAnswers && Object.keys(ans.trueFalseAnswers).length > 0)
-                );
-
+          {/* Question Number Grid */}
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                Daftar Nomor Soal ({questions.length} Soal)
+              </span>
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                Terjawab: {Object.keys(answeredMap).length}/{questions.length}
+              </span>
+            </div>
+            <div
+              data-number-grid
+              className="grid grid-cols-6 gap-1.5 max-h-[240px] overflow-y-auto p-1"
+            >
+              {questions.map((q, idx) => {
+                const isCurrent = idx === currentIndex;
+                const isAnswered = Boolean(answeredMap[q.id]);
                 return (
                   <button
-                    key={qId}
+                    key={q.id}
                     onClick={() => {
-                      onSelectQuestionId(qId);
-                      setShowGridModal(false);
+                      onSelectIndex(idx);
+                      onToggleOpen();
                     }}
-                    className={`h-11 rounded-xl font-bold text-sm flex flex-col items-center justify-center transition border ${
+                    className={`h-9 rounded-lg font-bold text-xs flex items-center justify-center transition-all ${
                       isCurrent
-                        ? 'bg-indigo-600 text-white border-indigo-700 shadow-md ring-2 ring-indigo-400 dark:ring-indigo-500'
+                        ? 'bg-brand-600 text-white ring-2 ring-brand-400 ring-offset-1 dark:ring-offset-slate-900'
                         : isAnswered
-                        ? 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-300 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300'
-                        : 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-600'
+                        ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800'
+                        : 'bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                     }`}
                   >
-                    <span>{qId}</span>
-                    {isAnswered && !isCurrent && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-0.5" />
-                    )}
+                    {q.number}
                   </button>
                 );
               })}
             </div>
+          </div>
 
-            {/* Footer */}
-            <div className="px-6 py-3 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-800 flex justify-end">
+          {/* Display Controls (Font Size, Dark Mode, Fullscreen) */}
+          <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+            <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+              <Type className="w-4 h-4 text-slate-500 ml-1.5 mr-1" />
+              {([1, 2, 3] as const).map((lvl) => (
+                <button
+                  key={lvl}
+                  onClick={() => onChangeFontSize(lvl)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
+                    fontSizeLevel === lvl
+                      ? 'bg-white dark:bg-slate-900 text-brand-600 dark:text-brand-400 shadow-sm'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
+                  }`}
+                >
+                  {lvl === 1 ? 'A' : lvl === 2 ? 'A+' : 'A++'}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-1.5">
               <button
-                onClick={() => setShowGridModal(false)}
-                className="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-bold hover:bg-slate-300 dark:hover:bg-slate-600 transition"
+                onClick={onToggleDarkMode}
+                title="Mode Gelap / Terang"
+                className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
               >
-                Tutup
+                {darkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4" />}
+              </button>
+              <button
+                onClick={onToggleFullscreen}
+                title="Layar Penuh (Tombol F)"
+                className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+              >
+                <Maximize2 className="w-4 h-4" />
               </button>
             </div>
           </div>
+
+          {/* Shortcut Legend */}
+          <div className="text-[11px] text-slate-400 dark:text-slate-500 flex flex-wrap justify-between gap-x-3 gap-y-1 pt-1 border-t border-slate-100 dark:border-slate-800">
+            <span>←/→ : Navigasi</span>
+            <span>P : Pembahasan</span>
+            <span>K : Kunci</span>
+            <span>H : Menu</span>
+            <span>F : Fullscreen</span>
+          </div>
         </div>
       )}
-    </>
+    </div>
   );
 };

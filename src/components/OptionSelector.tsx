@@ -1,250 +1,215 @@
 import React from 'react';
-import { QuestionItem } from '../types/question';
+import { Check, Square, CheckSquare } from 'lucide-react';
+import { QuestionOption, QuestionStatement, QuestionType } from '../types/question';
 import { MathRenderer } from './MathRenderer';
-import { RotateCcw, Eye, CheckCircle2 } from 'lucide-react';
 
 interface OptionSelectorProps {
-  question: QuestionItem;
-  selectedOption?: string;
-  selectedCheckboxes?: number[];
-  trueFalseAnswers?: { [index: number]: 'Benar' | 'Salah' };
-  onSelectOption: (key: string) => void;
-  onToggleCheckbox: (idx: number) => void;
-  onSelectTrueFalse: (statementIndex: number, choice: 'Benar' | 'Salah') => void;
-  onResetQuestionAnswer: () => void;
-  fontSizeClass: string;
-  hideOptions: boolean;
-  onToggleHideOptions: () => void;
-  showAnswerKey: boolean;
-  forceSingleColumn?: boolean;
+  type: QuestionType;
+  options?: QuestionOption[];
+  statements?: QuestionStatement[];
+  selectedSingle?: string;
+  selectedMultiple?: string[];
+  selectedTable?: Record<string, boolean>;
+  onSelectSingle: (optionId: string) => void;
+  onToggleMultiple: (optionId: string) => void;
+  onSelectTable: (statementId: string, val: boolean) => void;
+  showAnswer: boolean;
+  correctAnswer?: string | string[] | Record<string, boolean>;
+  fontSizeLevel: 1 | 2 | 3;
+  compact?: boolean;
+  hasVisual?: boolean;
 }
 
 export const OptionSelector: React.FC<OptionSelectorProps> = ({
-  question,
-  selectedOption,
-  selectedCheckboxes = [],
-  trueFalseAnswers = {},
-  onSelectOption,
-  onToggleCheckbox,
-  onSelectTrueFalse,
-  onResetQuestionAnswer,
-  fontSizeClass,
-  hideOptions,
-  onToggleHideOptions,
-  showAnswerKey,
-  forceSingleColumn = false,
+  type,
+  options = [],
+  statements = [],
+  selectedSingle,
+  selectedMultiple = [],
+  selectedTable = {},
+  onSelectSingle,
+  onToggleMultiple,
+  onSelectTable,
+  showAnswer,
+  correctAnswer,
+  fontSizeLevel,
+  compact = false,
+  hasVisual = false,
 }) => {
-  const hasAnswer =
-    Boolean(selectedOption) ||
-    selectedCheckboxes.length > 0 ||
-    Object.keys(trueFalseAnswers).length > 0;
+  const textSizeClass =
+    fontSizeLevel === 1
+      ? compact
+        ? 'text-[17px] leading-[1.35]'
+        : 'text-[19px] 2xl:text-[21px] leading-[1.38]'
+      : fontSizeLevel === 2
+      ? compact
+        ? 'text-[20px] leading-[1.4]'
+        : 'text-[23px] leading-[1.42]'
+      : compact
+      ? 'text-[22px] leading-[1.42]'
+      : 'text-[26px] leading-[1.45]';
 
-  if (hideOptions) {
+  if (type === 'table') {
     return (
-      <div className="mt-3 p-4 bg-amber-50/90 dark:bg-amber-950/40 border border-dashed border-amber-300 dark:border-amber-700/60 rounded-xl flex items-center justify-between">
-        <div className="flex items-center gap-3 text-amber-800 dark:text-amber-200">
-          <Eye className="w-5 h-5 text-amber-600 flex-shrink-0" />
-          <span className="font-semibold text-base md:text-lg">
-            Pilihan jawaban disembunyikan sementara.
-          </span>
-        </div>
-        <button
-          type="button"
-          onClick={onToggleHideOptions}
-          className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-lg shadow-sm transition active:scale-95 text-sm md:text-base"
-        >
-          Tampilkan Opsi
-        </button>
+      <div className="w-full overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+        <table className="w-full border-collapse text-left">
+          <thead>
+            <tr className="bg-slate-100/90 dark:bg-slate-800/90 border-b border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200">
+              <th className={`py-2.5 px-4 font-bold ${textSizeClass}`}>Pernyataan</th>
+              <th className={`py-2.5 px-4 font-bold text-center w-28 ${textSizeClass}`}>
+                Benar
+              </th>
+              <th className={`py-2.5 px-4 font-bold text-center w-28 ${textSizeClass}`}>
+                Salah
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-200/70 dark:divide-slate-800">
+            {statements.map((st, idx) => {
+              const userChoice = selectedTable[st.id];
+              const isTrueCorrect = st.isTrue === true;
+              const isFalseCorrect = st.isTrue === false;
+
+              return (
+                <tr
+                  key={st.id}
+                  className={`transition-colors ${
+                    idx % 2 === 0
+                      ? 'bg-white dark:bg-slate-900'
+                      : 'bg-slate-50/50 dark:bg-slate-900/50'
+                  }`}
+                >
+                  <td className={`py-2.5 px-4 text-slate-800 dark:text-slate-100 ${textSizeClass}`}>
+                    <MathRenderer content={st.text} />
+                  </td>
+                  <td className="py-2.5 px-4 text-center">
+                    <button
+                      type="button"
+                      onClick={() => onSelectTable(st.id, true)}
+                      className={`w-9 h-9 rounded-xl inline-flex items-center justify-center border-2 transition-all ${
+                        showAnswer && isTrueCorrect
+                          ? 'bg-emerald-600 border-emerald-600 text-white shadow-md scale-105'
+                          : userChoice === true
+                          ? 'bg-brand-600 border-brand-600 text-white'
+                          : 'border-slate-300 dark:border-slate-700 hover:border-brand-400 text-transparent'
+                      }`}
+                    >
+                      <Check className="w-5 h-5 stroke-[3]" />
+                    </button>
+                  </td>
+                  <td className="py-2.5 px-4 text-center">
+                    <button
+                      type="button"
+                      onClick={() => onSelectTable(st.id, false)}
+                      className={`w-9 h-9 rounded-xl inline-flex items-center justify-center border-2 transition-all ${
+                        showAnswer && isFalseCorrect
+                          ? 'bg-emerald-600 border-emerald-600 text-white shadow-md scale-105'
+                          : userChoice === false
+                          ? 'bg-brand-600 border-brand-600 text-white'
+                          : 'border-slate-300 dark:border-slate-700 hover:border-brand-400 text-transparent'
+                      }`}
+                    >
+                      <Check className="w-5 h-5 stroke-[3]" />
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     );
   }
 
-  // Determine whether MC options fit in 2 columns cleanly
-  const isShortMcOptions =
-    !forceSingleColumn &&
-    Boolean(
-      question.options &&
-        question.options.every((opt) => opt.text.length <= 36)
-    );
+  const isMultiple = type === 'multiple';
+  const correctList = Array.isArray(correctAnswer)
+    ? correctAnswer
+    : typeof correctAnswer === 'string'
+    ? [correctAnswer]
+    : [];
 
-  const tfHeaders = question.trueFalseHeaders || ['Pernyataan', 'Benar', 'Salah'];
+  // Use multi-column option grid when options contain matrices/determinants on non-visual questions
+  // so 5 tall matrix options never cause vertical scroll on 768p/900p screens.
+  const hasTallMatrixOptions =
+    !hasVisual &&
+    options.some((opt) => opt.text.includes('\\begin{'));
+
+  const containerLayoutClass = hasTallMatrixOptions
+    ? 'grid grid-cols-2 xl:grid-cols-3 gap-2.5'
+    : !hasVisual && options.length === 5
+    ? 'grid grid-cols-1 md:grid-cols-2 gap-2.5'
+    : 'flex flex-col gap-2';
 
   return (
-    <div className="mt-2.5 flex flex-col gap-2">
-      {/* 1. Multiple Choice (A, B, C, D, E) */}
-      {question.type === 'multiple-choice' && question.options && (
-        <div
-          className={`grid gap-2 ${
-            isShortMcOptions ? 'grid-cols-2' : 'grid-cols-1'
-          }`}
-        >
-          {question.options.map((opt, idx) => {
-            const isSelected = selectedOption === opt.key;
-            const isCorrectKey = showAnswerKey && question.solution.correctOptionKey === opt.key;
-            const isLastOfFive = isShortMcOptions && question.options!.length === 5 && idx === 4;
+    <div className={containerLayoutClass}>
+      {options.map((opt) => {
+        const isSelected = isMultiple
+          ? selectedMultiple.includes(opt.id)
+          : selectedSingle === opt.id;
+        const isCorrect = correctList.includes(opt.id);
 
-            return (
-              <button
-                key={opt.key}
-                type="button"
-                onClick={() => onSelectOption(opt.key)}
-                className={`flex items-center gap-3 py-2 px-3.5 rounded-xl border-2 text-left transition-all duration-150 active:scale-[0.99] ${
-                  isLastOfFive ? 'col-span-2' : ''
-                } ${
-                  isCorrectKey
-                    ? 'border-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 text-emerald-950 dark:text-emerald-100 shadow-md ring-2 ring-emerald-500/40'
-                    : isSelected
-                    ? 'border-brand-600 bg-sky-50 dark:bg-sky-950/40 text-brand-900 dark:text-sky-100 shadow-md ring-2 ring-brand-500/30'
-                    : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/60 text-slate-800 dark:text-slate-200'
-                }`}
-              >
-                <span
-                  className={`flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center font-bold text-lg transition-colors ${
-                    isCorrectKey
-                      ? 'bg-emerald-600 text-white shadow-sm'
-                      : isSelected
-                      ? 'bg-brand-600 text-white shadow-sm'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
-                  }`}
-                >
-                  {opt.key}
-                </span>
-                <div className={`flex-1 ${fontSizeClass} font-medium leading-snug`}>
-                  <MathRenderer content={opt.text} />
-                </div>
-                {isCorrectKey && (
-                  <CheckCircle2 className="w-6 h-6 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
-                )}
-              </button>
-            );
-          })}
-        </div>
-      )}
+        let cardStyle =
+          'bg-white dark:bg-slate-900 border-slate-200/90 dark:border-slate-800 hover:border-brand-400 dark:hover:border-brand-600 text-slate-800 dark:text-slate-100';
+        let badgeStyle =
+          'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700';
 
-      {/* 2. Complex Multiple Choice (Checkboxes) */}
-      {question.type === 'complex-multiple-choice' && question.checkboxOptions && (
-        <div className="grid grid-cols-1 gap-2">
-          {question.checkboxOptions.map((item, idx) => {
-            const isChecked = selectedCheckboxes.includes(idx);
-            const isCorrectBox =
-              showAnswerKey && question.solution.correctCheckboxIndices?.includes(idx);
+        if (showAnswer && isCorrect) {
+          cardStyle =
+            'bg-emerald-50/90 dark:bg-emerald-950/50 border-emerald-500 dark:border-emerald-500 text-emerald-950 dark:text-emerald-100 ring-2 ring-emerald-500/30';
+          badgeStyle = 'bg-emerald-600 text-white border-emerald-600';
+        } else if (isSelected) {
+          cardStyle =
+            'bg-brand-50/90 dark:bg-brand-950/60 border-brand-500 dark:border-brand-500 text-brand-950 dark:text-brand-100 ring-2 ring-brand-500/20';
+          badgeStyle = 'bg-brand-600 text-white border-brand-600';
+        }
 
-            return (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => onToggleCheckbox(idx)}
-                className={`flex items-center gap-3.5 py-2.5 px-4 rounded-xl border-2 text-left transition-all duration-150 active:scale-[0.99] ${
-                  isCorrectBox
-                    ? 'border-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 text-emerald-950 dark:text-emerald-100 shadow-md ring-2 ring-emerald-500/40'
-                    : isChecked
-                    ? 'border-brand-600 bg-sky-50 dark:bg-sky-950/40 text-brand-950 dark:text-sky-100 shadow-md ring-2 ring-brand-500/30'
-                    : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/60 text-slate-800 dark:text-slate-200'
-                }`}
-              >
-                <div
-                  className={`flex-shrink-0 w-7 h-7 rounded-lg border-2 flex items-center justify-center transition-colors ${
-                    isCorrectBox
-                      ? 'border-emerald-600 bg-emerald-600 text-white'
-                      : isChecked
-                      ? 'border-brand-600 bg-brand-600 text-white'
-                      : 'border-slate-400 dark:border-slate-600 bg-white dark:bg-slate-800'
-                  }`}
-                >
-                  {(isChecked || isCorrectBox) && (
-                    <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  )}
-                </div>
-                <div className={`flex-1 ${fontSizeClass} font-medium leading-snug`}>
-                  <MathRenderer content={item} />
-                </div>
-                {isCorrectBox && (
-                  <CheckCircle2 className="w-6 h-6 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
-                )}
-              </button>
-            );
-          })}
-        </div>
-      )}
-
-      {/* 3. True / False Table */}
-      {question.type === 'true-false-table' && question.statements && (
-        <div className="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm bg-white dark:bg-slate-900">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border-b border-slate-200 dark:border-slate-800">
-                <th className="py-2.5 px-4 font-extrabold text-base md:text-lg">{tfHeaders[0]}</th>
-                <th className="py-2.5 px-3 font-extrabold text-base md:text-lg text-center w-28">{tfHeaders[1]}</th>
-                <th className="py-2.5 px-3 font-extrabold text-base md:text-lg text-center w-28">{tfHeaders[2]}</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
-              {question.statements.map((stmt, idx) => {
-                const curAnswer = trueFalseAnswers[idx];
-                const correctTF = showAnswerKey ? question.solution.correctTrueFalse?.[idx] : undefined;
-
-                return (
-                  <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
-                    <td className={`py-2.5 px-4 ${fontSizeClass} font-medium text-slate-800 dark:text-slate-200 leading-snug`}>
-                      <MathRenderer content={stmt} />
-                    </td>
-                    <td className="py-2.5 px-2 text-center align-middle">
-                      <button
-                        type="button"
-                        onClick={() => onSelectTrueFalse(idx, 'Benar')}
-                        className={`w-full py-2 px-3 rounded-lg font-bold text-sm md:text-base transition-all active:scale-95 ${
-                          correctTF === 'Benar'
-                            ? 'bg-emerald-600 text-white shadow-md ring-2 ring-emerald-400'
-                            : curAnswer === 'Benar'
-                            ? 'bg-brand-600 text-white shadow-md ring-2 ring-brand-400/50'
-                            : 'bg-slate-100 dark:bg-slate-800 hover:bg-emerald-100 dark:hover:bg-emerald-950/40 text-slate-700 dark:text-slate-300'
-                        }`}
-                      >
-                        Benar
-                      </button>
-                    </td>
-                    <td className="py-2.5 px-2 text-center align-middle">
-                      <button
-                        type="button"
-                        onClick={() => onSelectTrueFalse(idx, 'Salah')}
-                        className={`w-full py-2 px-3 rounded-lg font-bold text-sm md:text-base transition-all active:scale-95 ${
-                          correctTF === 'Salah'
-                            ? 'bg-emerald-600 text-white shadow-md ring-2 ring-emerald-400'
-                            : curAnswer === 'Salah'
-                            ? 'bg-rose-600 text-white shadow-md ring-2 ring-rose-400/50'
-                            : 'bg-slate-100 dark:bg-slate-800 hover:bg-rose-100 dark:hover:bg-rose-950/40 text-slate-700 dark:text-slate-300'
-                        }`}
-                      >
-                        Salah
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      )}
-
-      {/* Reset Answer for Current Question */}
-      {hasAnswer && (
-        <div className="flex justify-end">
+        return (
           <button
+            key={opt.id}
             type="button"
-            onClick={onResetQuestionAnswer}
-            className="flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-slate-400 hover:text-rose-600 dark:text-slate-400 dark:hover:text-rose-400 transition"
+            onClick={() =>
+              isMultiple ? onToggleMultiple(opt.id) : onSelectSingle(opt.id)
+            }
+            className={`group w-full text-left rounded-xl border-2 transition-all flex items-center gap-3 ${
+              compact ? 'px-3 py-2' : 'px-3.5 py-2.5'
+            } ${cardStyle}`}
           >
-            <RotateCcw className="w-3 h-3" />
-            Reset Pilihan
+            {isMultiple ? (
+              <div
+                className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                  showAnswer && isCorrect
+                    ? 'text-emerald-600 dark:text-emerald-400'
+                    : isSelected
+                    ? 'text-brand-600 dark:text-brand-400'
+                    : 'text-slate-400 dark:text-slate-600 group-hover:text-brand-500'
+                }`}
+              >
+                {isSelected || (showAnswer && isCorrect) ? (
+                  <CheckSquare className="w-6 h-6 stroke-[2.5]" />
+                ) : (
+                  <Square className="w-6 h-6 stroke-[2]" />
+                )}
+              </div>
+            ) : (
+              <div
+                className={`w-8 h-8 rounded-lg border font-bold text-sm flex items-center justify-center shrink-0 transition-colors ${badgeStyle}`}
+              >
+                {opt.id}
+              </div>
+            )}
+
+            <div className={`flex-1 min-w-0 font-medium ${textSizeClass}`}>
+              <MathRenderer content={opt.text} />
+            </div>
+
+            {showAnswer && isCorrect && (
+              <span className="px-2 py-0.5 rounded-md bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider shrink-0">
+                Benar
+              </span>
+            )}
           </button>
-        </div>
-      )}
+        );
+      })}
     </div>
   );
 };

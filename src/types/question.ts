@@ -1,46 +1,30 @@
-export type QuestionType =
-  | 'multiple-choice'
-  | 'complex-multiple-choice'
-  | 'true-false-table';
+export type PackageId = 'siaga-2';
+
+export type QuestionType = 'single' | 'multiple' | 'table';
 
 export interface QuestionOption {
-  key: string;
+  id: string;
   text: string;
 }
 
-export interface QuestionSolution {
-  answerSummary: string;
-  correctOptionKey?: string;
-  correctCheckboxIndices?: number[];
-  correctTrueFalse?: { [index: number]: 'Benar' | 'Salah' };
-  steps: string[];
-  note?: string;
+export interface QuestionStatement {
+  id: string;
+  text: string;
+  isTrue: boolean;
 }
 
-export interface QuestionItem {
-  id: number;
+export interface Question {
+  id: string;
+  number: number;
+  packageId: PackageId;
   topic: string;
+  subtopic?: string;
   type: QuestionType;
-  storyContext?: string;
-  boxedProblem?: {
-    title: string;
-    text: string;
-    footerQuestion: string;
-  };
+  svgType?: string;
+  stimulus?: string;
   questionText: string;
-  note?: string;
-  visualId?: string;
   options?: QuestionOption[];
-  checkboxOptions?: string[];
-  statements?: string[];
-  trueFalseHeaders?: [string, string, string];
-  solution: QuestionSolution;
-}
-
-export interface UserAnswerState {
-  [questionId: number]: {
-    selectedOption?: string;
-    selectedCheckboxes?: number[];
-    trueFalseAnswers?: { [statementIndex: number]: 'Benar' | 'Salah' };
-  };
+  statements?: QuestionStatement[];
+  correctAnswer?: string | string[] | Record<string, boolean>;
+  solutionSteps: string[];
 }

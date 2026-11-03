@@ -1,160 +1,198 @@
 import React from 'react';
-import { QuestionItem } from '../types/question';
+import { Question } from '../types/question';
 import { MathRenderer } from './MathRenderer';
 import { OptionSelector } from './OptionSelector';
-import {
-  VisualSoal1,
-  VisualSoal5,
-  VisualSoal6,
-  VisualSoal7,
-  VisualSoal15,
-  VisualSoal16,
-  VisualSoal19,
-  VisualSoal20,
-  VisualSoal22,
-  VisualSoal24,
-  VisualSoal30,
-} from './svgs';
+import { QUESTION_SVGS } from './svgs';
 
 interface QuestionViewProps {
-  question: QuestionItem;
-  fontSizeLevel: number;
-  selectedOption?: string;
-  selectedCheckboxes?: number[];
-  trueFalseAnswers?: { [index: number]: 'Benar' | 'Salah' };
-  onSelectOption: (key: string) => void;
-  onToggleCheckbox: (idx: number) => void;
-  onSelectTrueFalse: (statementIndex: number, choice: 'Benar' | 'Salah') => void;
-  onResetQuestionAnswer: () => void;
-  hideOptions: boolean;
-  onToggleHideOptions: () => void;
-  showAnswerKey: boolean;
+  question: Question;
+  totalQuestions: number;
+  selectedSingle?: string;
+  selectedMultiple?: string[];
+  selectedTable?: Record<string, boolean>;
+  onSelectSingle: (optionId: string) => void;
+  onToggleMultiple: (optionId: string) => void;
+  onSelectTable: (statementId: string, val: boolean) => void;
+  showAnswer: boolean;
+  fontSizeLevel: 1 | 2 | 3;
 }
 
 export const QuestionView: React.FC<QuestionViewProps> = ({
   question,
+  selectedSingle,
+  selectedMultiple,
+  selectedTable,
+  onSelectSingle,
+  onToggleMultiple,
+  onSelectTable,
+  showAnswer,
   fontSizeLevel,
-  selectedOption,
-  selectedCheckboxes,
-  trueFalseAnswers,
-  onSelectOption,
-  onToggleCheckbox,
-  onSelectTrueFalse,
-  onResetQuestionAnswer,
-  hideOptions,
-  onToggleHideOptions,
-  showAnswerKey,
 }) => {
-  // Projector Font Size: Level 0: 20px, Level 1: 22px, Level 2: 24px
-  const baseSize =
-    fontSizeLevel === 2
-      ? 'text-[24px]'
-      : fontSizeLevel === 1
-      ? 'text-[22px]'
-      : 'text-[20px]';
+  const VisualComponent = question.svgType
+    ? QUESTION_SVGS[question.svgType]
+    : undefined;
 
-  const typography = {
-    stimulus: `${baseSize} font-normal leading-snug text-slate-800 dark:text-slate-200`,
-    question: `${baseSize} font-bold leading-snug text-slate-900 dark:text-slate-50`,
-    option: baseSize,
-  };
+  const hasVisual = Boolean(VisualComponent);
 
-  const renderVisual = (visualId?: string) => {
-    switch (visualId) {
-      case 'soal-1':
-        return <VisualSoal1 />;
-      case 'soal-5':
-        return <VisualSoal5 />;
-      case 'soal-6':
-        return <VisualSoal6 />;
-      case 'soal-7':
-        return <VisualSoal7 />;
-      case 'soal-15':
-        return <VisualSoal15 />;
-      case 'soal-16':
-        return <VisualSoal16 />;
-      case 'soal-19':
-        return <VisualSoal19 />;
-      case 'soal-20':
-        return <VisualSoal20 />;
-      case 'soal-22':
-        return <VisualSoal22 />;
-      case 'soal-24':
-        return <VisualSoal24 />;
-      case 'soal-30':
-        return <VisualSoal30 />;
-      default:
-        return null;
-    }
-  };
+  const stimulusSize =
+    fontSizeLevel === 1
+      ? 'text-[20px] 2xl:text-[22px] leading-[1.38]'
+      : fontSizeLevel === 2
+      ? 'text-[24px] leading-[1.45]'
+      : 'text-[27px] leading-[1.48]';
+
+  const questionSize =
+    fontSizeLevel === 1
+      ? 'text-[20px] 2xl:text-[22px] leading-[1.36]'
+      : fontSizeLevel === 2
+      ? 'text-[24px] leading-[1.42]'
+      : 'text-[27px] leading-[1.46]';
+
+  const typeBadge =
+    question.type === 'single'
+      ? 'Pilihan Ganda'
+      : question.type === 'multiple'
+      ? 'PGK MCMA (Lebih dari 1 Jawaban)'
+      : 'PGK Kategori (Benar / Salah)';
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-4xl mx-auto pb-24">
-      {/* Header Soal & Topik */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-4">
-        <div className="flex items-center gap-3">
-          <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-600 to-indigo-700 text-white font-black text-xl shadow-md">
-            {question.id}
-          </span>
-          <div>
-            <div className="text-xs font-semibold tracking-wider text-indigo-600 dark:text-indigo-400 uppercase">
-              {question.topic}
+    <div
+      data-question-view
+      className="w-full h-full px-5 pt-3 pb-3 flex flex-col justify-center overflow-hidden"
+    >
+      {hasVisual ? (
+        /* Split Layout: Left 5/12 for Text & Options, Right 7/12 (58.3%) for Vector Diagram */
+        <div className="w-full h-full grid grid-cols-12 gap-5 items-center overflow-hidden">
+          <div
+            data-text-column
+            className="col-span-5 h-full flex flex-col justify-center overflow-y-auto pr-2 py-1 gap-2.5 custom-scrollbar"
+          >
+            {/* Header Badges */}
+            <div className="flex flex-wrap items-center gap-2 pr-4">
+              <span className="inline-flex items-center justify-center px-3 py-1 rounded-xl bg-brand-600 text-white font-extrabold text-sm tracking-wide shadow-sm">
+                SOAL {question.number}
+              </span>
+              <span className="px-2.5 py-1 rounded-lg bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs uppercase tracking-wider">
+                {question.topic}
+              </span>
+              {question.subtopic && (
+                <span className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/60 text-slate-600 dark:text-slate-400 font-semibold text-xs">
+                  {question.subtopic}
+                </span>
+              )}
+              <span className="px-2.5 py-1 rounded-lg bg-amber-100/80 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 font-semibold text-xs">
+                {typeBadge}
+              </span>
             </div>
-            <div className="text-xs text-slate-500 dark:text-slate-400">
-              {question.type === 'multiple-choice'
-                ? 'Pilihan Ganda (A - E)'
-                : question.type === 'complex-multiple-choice'
-                ? 'Pilihan Ganda Kompleks (Banyak Pilihan)'
-                : 'Tabel Evaluasi (Benar / Salah)'}
+
+            {/* Stimulus Card */}
+            {question.stimulus && (
+              <div
+                data-stimulus
+                className={`p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 text-slate-800 dark:text-slate-200 shadow-sm ${stimulusSize}`}
+              >
+                <MathRenderer content={question.stimulus} />
+              </div>
+            )}
+
+            {/* Question Stem */}
+            <div
+              data-question-text
+              className={`font-bold text-slate-900 dark:text-white ${questionSize}`}
+            >
+              <MathRenderer content={question.questionText} />
+            </div>
+
+            {/* Options / Statements */}
+            <OptionSelector
+              type={question.type}
+              options={question.options}
+              statements={question.statements}
+              selectedSingle={selectedSingle}
+              selectedMultiple={selectedMultiple}
+              selectedTable={selectedTable}
+              onSelectSingle={onSelectSingle}
+              onToggleMultiple={onToggleMultiple}
+              onSelectTable={onSelectTable}
+              showAnswer={showAnswer}
+              correctAnswer={question.correctAnswer}
+              fontSizeLevel={fontSizeLevel}
+              compact={true}
+              hasVisual={true}
+            />
+          </div>
+
+          {/* Right 7/12 Visual Canvas */}
+          <div
+            data-photo-container
+            className="col-span-7 h-full max-h-[93vh] flex items-center justify-center bg-white dark:bg-slate-900 rounded-3xl border-2 border-slate-200/90 dark:border-slate-800 shadow-md p-5 overflow-hidden"
+          >
+            <div className="w-full h-full flex items-center justify-center">
+              {VisualComponent && <VisualComponent />}
             </div>
           </div>
         </div>
+      ) : (
+        /* Full-Width Centered Layout for Non-Photo Questions */
+        <div
+          data-text-column
+          className="w-full max-w-[1440px] mx-auto h-full flex flex-col justify-center overflow-y-auto px-4 py-1 gap-2.5 2xl:gap-3.5 custom-scrollbar"
+        >
+          {/* Header Badges */}
+          <div className="flex flex-wrap items-center gap-2.5 pr-72">
+            <span className="inline-flex items-center justify-center px-3.5 py-1 rounded-xl bg-brand-600 text-white font-extrabold text-base tracking-wide shadow-sm">
+              SOAL {question.number}
+            </span>
+            <span className="px-3 py-1 rounded-lg bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs uppercase tracking-wider">
+              {question.topic}
+            </span>
+            {question.subtopic && (
+              <span className="px-3 py-1 rounded-lg bg-slate-100 dark:bg-slate-800/60 text-slate-600 dark:text-slate-400 font-semibold text-xs">
+                {question.subtopic}
+              </span>
+            )}
+            <span className="px-3 py-1 rounded-lg bg-amber-100/80 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 font-semibold text-xs">
+              {typeBadge}
+            </span>
+          </div>
 
-        {/* Action button reset answer per question */}
-        {(selectedOption ||
-          (selectedCheckboxes && selectedCheckboxes.length > 0) ||
-          (trueFalseAnswers && Object.keys(trueFalseAnswers).length > 0)) && (
-          <button
-            onClick={onResetQuestionAnswer}
-            className="text-xs px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+          {/* Stimulus Card */}
+          {question.stimulus && (
+            <div
+              data-stimulus
+              className={`p-3.5 2xl:p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 text-slate-800 dark:text-slate-200 shadow-sm ${stimulusSize}`}
+            >
+              <MathRenderer content={question.stimulus} />
+            </div>
+          )}
+
+          {/* Question Stem */}
+          <div
+            data-question-text
+            className={`font-bold text-slate-900 dark:text-white ${questionSize}`}
           >
-            Hapus Jawaban Soal Ini
-          </button>
-        )}
-      </div>
+            <MathRenderer content={question.questionText} />
+          </div>
 
-      {/* Stimulus Context */}
-      {question.storyContext && (
-        <div className={`p-4 rounded-xl bg-slate-100/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 ${typography.stimulus}`}>
-          <MathRenderer content={question.storyContext} />
+          {/* Options / Statements */}
+          <OptionSelector
+            type={question.type}
+            options={question.options}
+            statements={question.statements}
+            selectedSingle={selectedSingle}
+            selectedMultiple={selectedMultiple}
+            selectedTable={selectedTable}
+            onSelectSingle={onSelectSingle}
+            onToggleMultiple={onToggleMultiple}
+            onSelectTable={onSelectTable}
+            showAnswer={showAnswer}
+            correctAnswer={question.correctAnswer}
+            fontSizeLevel={fontSizeLevel}
+            compact={false}
+            hasVisual={false}
+          />
         </div>
       )}
-
-      {/* Visual illustration (SVG) */}
-      {question.visualId && renderVisual(question.visualId)}
-
-      {/* Pertanyaan Inti */}
-      <div className={`p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm ${typography.question}`}>
-        <MathRenderer content={question.questionText} />
-      </div>
-
-      {/* Pilihan Jawaban */}
-      <div className="relative">
-        <OptionSelector
-          question={question}
-          selectedOption={selectedOption}
-          selectedCheckboxes={selectedCheckboxes}
-          trueFalseAnswers={trueFalseAnswers}
-          onSelectOption={onSelectOption}
-          onToggleCheckbox={onToggleCheckbox}
-          onSelectTrueFalse={onSelectTrueFalse}
-          onResetQuestionAnswer={onResetQuestionAnswer}
-          fontSizeClass={typography.option}
-          hideOptions={hideOptions}
-          onToggleHideOptions={onToggleHideOptions}
-          showAnswerKey={showAnswerKey}
-        />
-      </div>
     </div>
   );
 };
