@@ -11,6 +11,7 @@ import {
   Moon,
   Type,
   X,
+  FileDown,
 } from 'lucide-react';
 import { PackageId, Question } from '../types/question';
 
@@ -227,6 +228,19 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 <Maximize2 className="w-4 h-4" />
               </button>
             </div>
+          </div>
+
+          {/* Tombol Unduh PDF Handout 4 Halaman A4 */}
+          <div>
+            <a
+              href={`${import.meta.env.BASE_URL}25-Soal-TKA-Matematika-Tingkat-Lanjut-Siaga-2.pdf`}
+              download="25-Soal-TKA-Matematika-Tingkat-Lanjut-Siaga-2.pdf"
+              data-download-pdf
+              className="w-full py-2 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white shadow-sm transition-colors"
+            >
+              <FileDown className="w-4 h-4" />
+              <span>Unduh Naskah PDF (25 Soal • 4 Halaman A4)</span>
+            </a>
           </div>
 
           {/* Shortcut Legend */}

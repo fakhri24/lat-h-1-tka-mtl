@@ -52,7 +52,7 @@ async function runAudit() {
       await page.goto(baseUrl, { waitUntil: 'networkidle' });
       await page.evaluate(() => document.fonts.ready);
 
-      const totalQ = 33;
+      const totalQ = 25;
       const vpRecords = [];
 
       for (let qIdx = 0; qIdx < totalQ; qIdx++) {
@@ -296,7 +296,7 @@ async function runAudit() {
 
     const avgScore = (totalScore / totalItems).toFixed(2);
     console.log('====================================================');
-    console.log(`TOTAL ITEMS AUDITED: ${totalItems} (33 questions x 3 viewports)`);
+    console.log(`TOTAL ITEMS AUDITED: ${totalItems} (25 questions x 3 viewports)`);
     console.log(`AVERAGE UI/UX & KATEX SCORE: ${avgScore} / 10.00`);
     console.log(`ISSUES FOUND: ${issues.length}`);
     if (issues.length > 0) {

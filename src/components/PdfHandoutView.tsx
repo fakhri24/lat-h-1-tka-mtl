@@ -11,10 +11,10 @@ interface PageSpec {
 }
 
 const PAGES_SIAGA_2: PageSpec[] = [
-  { pageNumber: 1, leftNums: [1, 2, 3, 4, 5, 6], rightNums: [7, 8, 9, 10] },
-  { pageNumber: 2, leftNums: [11, 12, 13, 14], rightNums: [15, 16, 17, 18] },
-  { pageNumber: 3, leftNums: [19, 20, 21, 22], rightNums: [23, 24, 25, 26] },
-  { pageNumber: 4, leftNums: [27, 28, 29, 30], rightNums: [31, 32, 33] },
+  { pageNumber: 1, leftNums: [1, 2, 3, 4], rightNums: [5, 6, 7] },
+  { pageNumber: 2, leftNums: [8, 9, 10], rightNums: [11, 12, 13] },
+  { pageNumber: 3, leftNums: [14, 15, 16], rightNums: [17, 18] },
+  { pageNumber: 4, leftNums: [19, 20, 21], rightNums: [22, 23, 24, 25] },
 ];
 
 const compactNewlines = (text?: string): string => {
@@ -26,18 +26,18 @@ const PdfQuestionBlock: React.FC<{ q: Question }> = ({ q }) => {
   const VisualComponent = q.svgType ? QUESTION_SVGS[q.svgType] : undefined;
 
   // Choose compact option grid columns based on option content length/type
-  const isOneColOptions = [9, 14, 17, 31].includes(q.number);
-  const isTwoColOptions = [5, 6, 7, 8, 10, 12, 13, 15, 22, 23, 25, 26, 27, 29, 33].includes(
+  const isOneColOptions = [9, 12, 20, 22].includes(q.number);
+  const isTwoColOptions = [5, 6, 7, 8, 10, 13, 15, 16, 17, 18, 19, 21, 23, 25].includes(
     q.number
   );
-  const isFiveColOptions = [1, 2, 3, 4, 21, 32].includes(q.number);
+  const isFiveColOptions = [1, 2, 3, 4, 24].includes(q.number);
 
   const hasMatrixInOptions = q.options?.some((o) => o.text.includes('\\begin{'));
 
   return (
     <div
       data-pdf-question={q.number}
-      className="border border-slate-300 rounded-md px-2 py-1.5 bg-white flex flex-col gap-0.5 text-[9.5px] leading-[1.24] text-slate-900 [&_.katex-display]:!my-0.5"
+      className="border border-slate-300 rounded-md px-2.5 py-1.5 bg-white flex flex-col gap-0.5 text-[9.5px] leading-[1.26] text-slate-900 [&_.katex-display]:!my-0.5"
     >
       {/* Header Soal & Topik */}
       <div className="flex items-center justify-between border-b border-slate-200 pb-0.5 mb-0.5">
@@ -201,7 +201,7 @@ export const PdfHandoutView: React.FC = () => {
                     LATIHAN H-1 TKA MATEMATIKA TINGKAT LANJUT
                   </h1>
                   <p className="text-[9.5px] font-bold text-slate-700">
-                    Naskah Soal Uji Siaga 2 (33 Soal) • Tahun Ajaran 2026/2027
+                    Naskah Soal Uji Siaga 2 (25 Soal) • Tahun Ajaran 2026/2027
                   </p>
                 </div>
                 <div className="text-right">
@@ -236,10 +236,10 @@ export const PdfHandoutView: React.FC = () => {
                   {/* Kunci Jawaban Singkat di Halaman 4 Kolom Kanan */}
                   {pSpec.pageNumber === 4 && (
                     <div className="border-2 border-slate-900 rounded-md p-2 bg-slate-50 mt-1">
-                      <div className="text-[9.5px] font-black uppercase tracking-wider text-slate-950 border-b border-slate-300 pb-1 mb-1.5 text-center">
-                        Kunci Jawaban Singkat (Nomor 1 – 33)
+                      <div className="text-[9.5px] font-black uppercase tracking-wider text-slate-950 border-b border-slate-300 pb-1 mb-1 text-center">
+                        Kunci Jawaban Singkat (Nomor 1 – 25)
                       </div>
-                      <div className="grid grid-cols-6 gap-x-1.5 gap-y-0.5 text-[8.5px] font-bold text-slate-800">
+                      <div className="grid grid-cols-5 gap-x-1.5 gap-y-0.5 text-[8.5px] font-bold text-slate-800">
                         {questionsData.map((q) => (
                           <div
                             key={q.id}

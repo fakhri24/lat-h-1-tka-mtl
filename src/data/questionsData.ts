@@ -24,14 +24,15 @@ export const questionsData: Question[] = [
     ],
     correctAnswer: 'C',
     solutionSteps: [
-      'Substitusikan komponen vektor ke dalam persamaan $2\\vec{u} - \\vec{v} + 3\\vec{w} = \\begin{pmatrix} -5 \\\\ 1 \\\\ 5 \\end{pmatrix}$:',
+      'Substitusikan komponen vektor ke dalam persamaan kombinasi linear $2\\vec{u} - \\vec{v} + 3\\vec{w} = \\begin{pmatrix} -5 \\\\ 1 \\\\ 5 \\end{pmatrix}$:',
       '$$2\\begin{pmatrix} p \\\\ 2 \\\\ -1 \\end{pmatrix} - \\begin{pmatrix} 4 \\\\ -3 \\\\ q \\end{pmatrix} + 3\\begin{pmatrix} -1 \\\\ r \\\\ 5 \\end{pmatrix} = \\begin{pmatrix} -5 \\\\ 1 \\\\ 5 \\end{pmatrix}$$',
-      '$$\\begin{pmatrix} 2p - 4 - 3 \\\\ 4 + 3 + 3r \\\\ -2 - q + 15 \\end{pmatrix} = \\begin{pmatrix} -5 \\\\ 1 \\\\ 5 \\end{pmatrix}$$',
-      'Selesaikan tiap baris komponen:',
-      'Baris pertama: $2p - 7 = -5 \\implies 2p = 2 \\implies p = 1$.',
-      'Baris kedua: $7 + 3r = 1 \\implies 3r = -6 \\implies r = -2$.',
-      'Baris ketiga: $13 - q = 5 \\implies q = 8$.',
-      'Jadi, nilai $p + q + r = 1 + 8 + (-2) = 7$.',
+      '$$\\begin{pmatrix} 2p - 4 - 3 \\\\ 4 - (-3) + 3r \\\\ -2 - q + 15 \\end{pmatrix} = \\begin{pmatrix} -5 \\\\ 1 \\\\ 5 \\end{pmatrix}$$',
+      'Selesaikan persamaan untuk tiap baris komponen:',
+      '• Baris 1: $2p - 7 = -5 \\implies 2p = 2 \\implies p = 1$',
+      '• Baris 2: $7 + 3r = 1 \\implies 3r = -6 \\implies r = -2$',
+      '• Baris 3: $13 - q = 5 \\implies q = 8$',
+      'Hitung jumlah $p + q + r$:',
+      '$$p + q + r = 1 + 8 + (-2) = 7$$',
     ],
   },
 
@@ -46,7 +47,7 @@ export const questionsData: Question[] = [
     subtopic: 'Panjang (Modulus) Vektor',
     type: 'single',
     stimulus:
-      'Diketahui vektor $\\vec{v} = \\begin{pmatrix} t - 1 \\\\ 1 \\\\ 8 \\end{pmatrix} \\in \\mathbb{R}^3$ dengan $t < 0$.',
+      'Diketahui vektor $\\vec{v} = \\begin{pmatrix} t - 1 \\\\ 1 \\\\ 8 \\end{pmatrix} \\in \\mathbb{R}^3$ dengan syarat nilai $t < 0$.',
     questionText:
       'Jika panjang vektor $|\\vec{v}| = 9$, maka nilai $t$ yang memenuhi adalah ....',
     options: [
@@ -58,12 +59,15 @@ export const questionsData: Question[] = [
     ],
     correctAnswer: 'C',
     solutionSteps: [
-      'Rumus panjang vektor $\\vec{v} = \\begin{pmatrix} x \\\\ y \\\\ z \\end{pmatrix}$ adalah $|\\vec{v}| = \\sqrt{x^2 + y^2 + z^2}$.',
+      'Rumus modulus vektor $\\vec{v} = \\begin{pmatrix} x \\\\ y \\\\ z \\end{pmatrix}$ adalah $|\\vec{v}| = \\sqrt{x^2 + y^2 + z^2}$.',
       'Kuadratkan kedua ruas persamaan $|\\vec{v}| = 9$:',
       '$$(t - 1)^2 + 1^2 + 8^2 = 9^2$$',
       '$$(t - 1)^2 + 1 + 64 = 81$$',
-      '$$(t - 1)^2 = 16 \\implies t - 1 = \\pm 4$$',
-      'Diperoleh $t = 5$ atau $t = -3$. Karena diketahui syarat $t < 0$, maka nilai yang memenuhi adalah $t = -3$.',
+      '$$(t - 1)^2 = 81 - 65 = 16$$',
+      'Tarik akar kedua ruas:',
+      '$$t - 1 = \\pm 4 \\implies t = 1 \\pm 4$$',
+      'Diperoleh dua kemungkinan nilai: $t = 5$ atau $t = -3$.',
+      'Karena terdapat batasan $t < 0$, maka nilai yang memenuhi adalah $t = -3$.',
     ],
   },
 
@@ -88,9 +92,12 @@ export const questionsData: Question[] = [
     ],
     correctAnswer: 'E',
     solutionSteps: [
-      'Gunakan identitas Pythagoras $\\cos^2 x = 1 - \\sin^2 x = (1 - \\sin x)(1 + \\sin x)$:',
-      '$$\\lim_{x \\to \\frac{\\pi}{2}} \\frac{4(1 - \\sin x)(1 + \\sin x)}{\\sin x - 1} = \\lim_{x \\to \\frac{\\pi}{2}} \\frac{-4(\\sin x - 1)(1 + \\sin x)}{\\sin x - 1}$$',
-      'Sederhanakan faktor $(\\sin x - 1)$:',
+      'Substitusi langsung menghasilkan bentuk tak tentu $\\frac{4\\cos^2(\\pi/2)}{\\sin(\\pi/2) - 1} = \\frac{0}{0}$.',
+      'Gunakan identitas Pythagoras $\\cos^2 x = 1 - \\sin^2 x$ pada pembilang:',
+      '$$\\lim_{x \\to \\frac{\\pi}{2}} \\frac{4(1 - \\sin^2 x)}{\\sin x - 1}$$',
+      'Faktorkan selisih dua kuadrat $1 - \\sin^2 x = (1 - \\sin x)(1 + \\sin x)$:',
+      '$$= \\lim_{x \\to \\frac{\\pi}{2}} \\frac{-4(\\sin x - 1)(1 + \\sin x)}{\\sin x - 1}$$',
+      'Bagi pembilang dan penyebut dengan faktor pembuat nol $(\\sin x - 1)$:',
       '$$= \\lim_{x \\to \\frac{\\pi}{2}} -4(1 + \\sin x)$$',
       'Substitusikan $x = \\frac{\\pi}{2}$ di mana $\\sin\\left(\\frac{\\pi}{2}\\right) = 1$:',
       '$$= -4(1 + 1) = -8$$',
@@ -98,7 +105,7 @@ export const questionsData: Question[] = [
   },
 
   // =========================================================================
-  // 4. Limit Fungsi Trigonometri x -> 3
+  // 4. Limit Fungsi Trigonometri Sudut Rangkap x -> 3
   // =========================================================================
   {
     id: 'siaga2-q4',
@@ -118,17 +125,18 @@ export const questionsData: Question[] = [
     ],
     correctAnswer: 'E',
     solutionSteps: [
-      'Faktorkan sudut $2x - 6 = 2(x - 3)$ dan gunakan identitas $1 - \\cos 2u = 2\\sin^2 u$ dengan $u = x - 3$:',
-      '$$1 - \\cos(2(x - 3)) = 2\\sin^2(x - 3)$$',
-      'Substitusikan kembali ke bentuk limit:',
-      '$$\\lim_{x \\to 3} \\frac{3 \\cdot 2\\sin^2(x - 3)}{(x - 3)^2} = 6 \\cdot \\lim_{x \\to 3} \\left(\\frac{\\sin(x - 3)}{x - 3}\\right)^2$$',
-      'Karena $\\lim_{u \\to 0} \\frac{\\sin u}{u} = 1$, maka:',
+      'Gunakan substitusi variabel: misalkan $u = x - 3$. Saat $x \\to 3$, maka $u \\to 0$.',
+      'Bentuk argumen kosinus dapat ditulis: $2x - 6 = 2(x - 3) = 2u$. Persamaan limit menjadi:',
+      '$$\\lim_{u \\to 0} \\frac{3(1 - \\cos 2u)}{u^2}$$',
+      'Gunakan rumus sudut rangkap kosinus $1 - \\cos 2u = 2\\sin^2 u$:',
+      '$$\\lim_{u \\to 0} \\frac{3 \\cdot 2\\sin^2 u}{u^2} = 6 \\cdot \\lim_{u \\to 0} \\left(\\frac{\\sin u}{u}\\right)^2$$',
+      'Karena $\\lim_{u \\to 0} \\frac{\\sin u}{u} = 1$, maka diperoleh:',
       '$$= 6 \\cdot (1)^2 = 6$$',
     ],
   },
 
   // =========================================================================
-  // 5. Polinomial — Total Pendapatan Perusahaan di Bulan ke-3
+  // 5. Polinomial — Penjumlahan Keuntungan Dua Sektor Usaha
   // =========================================================================
   {
     id: 'siaga2-q5',
@@ -138,29 +146,30 @@ export const questionsData: Question[] = [
     subtopic: 'Operasi Penjumlahan dan Nilai Polinomial',
     type: 'single',
     stimulus:
-      'Sebuah perusahaan memproduksi dua jenis barang, yaitu barang A dan barang B. Pendapatan dari penjualan barang A dan barang B dinyatakan dalam bentuk polinomial (dalam juta rupiah) terhadap waktu $x$ (dalam bulan): $A(x) = 3x^3 + 5x^2 - 12x + 150$ dan $B(x) = x^3 - 2x^2 + 20x + 50$.',
+      'Sebuah perusahaan memiliki dua bidang usaha. Bidang A bergerak di sektor manufaktur, sedangkan bidang B bergerak di sektor distribusi. Keuntungan bulanan dari masing-masing bidang usaha (dalam juta rupiah) dimodelkan oleh fungsi:\n$$A(x) = 3x^3 + 5x^2 - 12x + 150$$\n$$B(x) = x^3 - 2x^2 + 20x + 50$$\ndengan $x$ menyatakan lama beroperasi bidang usaha dalam satuan bulan.',
     questionText:
-      'Total pendapatan perusahaan dari kedua jenis barang pada bulan ketiga adalah ....',
+      'Manajemen perusahaan ingin mengetahui total keuntungan yang diperoleh dari kedua bidang usaha tersebut. Keuntungan perusahaan tersebut pada bulan ketiga adalah ....',
     options: [
       { id: 'A', text: '$\\text{Rp}359.000.000,00$' },
-      { id: 'B', text: '$\\text{Rp}356.000.000,00$' },
-      { id: 'C', text: '$\\text{Rp}349.000.000,00$' },
-      { id: 'D', text: '$\\text{Rp}329.000.000,00$' },
-      { id: 'E', text: '$\\text{Rp}250.000.000,00$' },
+      { id: 'B', text: '$\\text{Rp}365.000.000,00$' },
+      { id: 'C', text: '$\\text{Rp}372.000.000,00$' },
+      { id: 'D', text: '$\\text{Rp}380.000.000,00$' },
+      { id: 'E', text: '$\\text{Rp}395.000.000,00$' },
     ],
     correctAnswer: 'A',
     solutionSteps: [
-      'Jumlahkan fungsi pendapatan $T(x) = A(x) + B(x)$:',
-      '$$T(x) = (3 + 1)x^3 + (5 - 2)x^2 + (-12 + 20)x + (150 + 50) = 4x^3 + 3x^2 + 8x + 200$$',
-      'Substitusikan $x = 3$ (bulan ketiga):',
-      '$$T(3) = 4(3)^3 + 3(3)^2 + 8(3) + 200 = 4(27) + 3(9) + 24 + 200$$',
-      '$$T(3) = 108 + 27 + 24 + 200 = 359\\text{ juta rupiah}$$',
-      'Jadi, total pendapatan pada bulan ketiga adalah $\\text{Rp}359.000.000,00$.',
+      'Jumlahkan kedua fungsi polinomial untuk memperoleh total keuntungan $T(x) = A(x) + B(x)$:',
+      '$$T(x) = (3x^3 + 5x^2 - 12x + 150) + (x^3 - 2x^2 + 20x + 50)$$',
+      '$$T(x) = 4x^3 + 3x^2 + 8x + 200$$',
+      'Evaluasi fungsi total keuntungan pada bulan ketiga ($x = 3$):',
+      '$$T(3) = 4(3)^3 + 3(3)^2 + 8(3) + 200$$',
+      '$$T(3) = 4(27) + 3(9) + 24 + 200 = 108 + 27 + 24 + 200 = 359$$',
+      'Karena satuan fungsi dalam juta rupiah, total keuntungan pada bulan ketiga adalah $\\text{Rp}359.000.000,00$.',
     ],
   },
 
   // =========================================================================
-  // 6. Polinomial — Interval Waktu Keuntungan Positif f(x) > 0
+  // 6. Polinomial — Akar-akar & Pertidaksamaan Transportasi
   // =========================================================================
   {
     id: 'siaga2-q6',
@@ -170,44 +179,46 @@ export const questionsData: Question[] = [
     subtopic: 'Akar-akar Polinomial & Pertidaksamaan',
     type: 'single',
     stimulus:
-      'Sebuah bisnis pakaian mencatat keuntungannya setiap bulan mengikuti fungsi suku banyak $f(x) = x^3 - 6x^2 + 11x - 6$ (dalam puluhan juta rupiah), dengan $x$ merupakan waktu dalam bulan.',
+      'Suatu perusahaan yang bergerak di bidang transportasi memodelkan keuntungan usahanya (dalam jutaan rupiah) menggunakan fungsi $f(x) = x^3 - 6x^2 + 11x - 6$, dengan $x$ menyatakan waktu dalam bulan. Pihak manajemen perusahaan ingin mengamati pergerakan keuntungan pada periode bulan ke-$2$ hingga bulan ke-$5$ ($2 \\le x \\le 5$).',
     questionText:
-      'Jika pengamatan dilakukan dari bulan ke-$2$ hingga bulan ke-$5$ ($2 \\le x \\le 5$), bisnis tersebut memperoleh keuntungan positif ($f(x) > 0$) pada rentang waktu ....',
+      'Pada interval mana perusahaan mendapatkan keuntungan ($f(x) > 0$)?',
     options: [
-      { id: 'A', text: '$2,5 < x < 3$' },
-      { id: 'B', text: '$2,5 \\le x \\le 3$' },
-      { id: 'C', text: '$3 < x < 5$' },
+      { id: 'A', text: '$2{,}5 < x < 3$' },
+      { id: 'B', text: '$2{,}5 \\le x \\le 3$' },
+      { id: 'C', text: '$2 < x < 3$' },
       { id: 'D', text: '$3 < x \\le 5$' },
-      { id: 'E', text: '$3 \\le x \\le 5$' },
+      { id: 'E', text: '$2 \\le x \\le 4$' },
     ],
     correctAnswer: 'D',
     solutionSteps: [
-      'Faktorkan suku banyak $f(x) = x^3 - 6x^2 + 11x - 6$:',
-      'Uji $x = 1$: $f(1) = 1 - 6 + 11 - 6 = 0$, sehingga $(x - 1)$ adalah faktor.',
+      'Perusahaan mendapatkan keuntungan jika nilai fungsi keuntungan bernilai positif: $f(x) > 0$.',
+      'Faktorkan suku banyak $x^3 - 6x^2 + 11x - 6 = 0$. Uji nilai $x = 1$:',
+      '$$f(1) = 1^3 - 6(1)^2 + 11(1) - 6 = 1 - 6 + 11 - 6 = 0$$',
       'Bagi dengan $(x - 1)$ menghasilkan $x^2 - 5x + 6 = (x - 2)(x - 3)$.',
-      'Diperoleh pemfaktoran lengkap: $f(x) = (x - 1)(x - 2)(x - 3)$ dengan pembuat nol $x = 1, 2, 3$.',
-      'Uji tanda pada interval pengamatan $2 \\le x \\le 5$:',
-      '• Untuk $2 < x < 3$: $f(2,5) = (1,5)(0,5)(-0,5) = -0,375 < 0$ (rugi).',
-      '• Untuk $x = 3$: $f(3) = 0$ (impas).',
-      '• Untuk $3 < x \\le 5$: semua faktor positif sehingga $f(x) > 0$ (untung).',
-      'Jadi, bisnis memperoleh keuntungan positif pada rentang $3 < x \\le 5$.',
+      'Diperoleh bentuk pemfaktoran penuh: $f(x) = (x - 1)(x - 2)(x - 3)$.',
+      'Buat garis bilangan untuk tanda nilai $f(x)$:',
+      '• Untuk $x < 1$: bernilai negatif',
+      '• Untuk $1 < x < 2$: bernilai positif',
+      '• Untuk $2 < x < 3$: bernilai negatif (mengalami kerugian)',
+      '• Untuk $x > 3$: bernilai positif (mendapatkan keuntungan)',
+      'Karena periode pengamatan dibatasi pada $2 \\le x \\le 5$, maka perusahaan mendapatkan keuntungan pada interval $3 < x \\le 5$.',
     ],
   },
 
   // =========================================================================
-  // 7. Polinomial — Titik Impas (Break-Even Point) Penjualan
+  // 7. Polinomial — Pendapatan vs Modal (Titik Impas)
   // =========================================================================
   {
     id: 'siaga2-q7',
     number: 7,
     packageId: 'siaga-2',
     topic: 'Polinomial',
-    subtopic: 'Persamaan Polinomial dalam Ekonomi',
+    subtopic: 'Pemodelan Polinomial dalam Ekonomi',
     type: 'single',
     stimulus:
-      'Sebuah perusahaan teknologi memodelkan pendapatan sebagai $f(x) = 2x^3 + 2x^2 + 40x$ dan biaya operasional sebagai $c(x) = x^3 + 6x^2 + 15x + 150$, dengan $x$ menyatakan jumlah produk terjual (dalam ratusan unit) dan nilai uang dalam jutaan rupiah.',
+      'Sebuah perusahaan memproduksi dan menjual suatu barang. Pendapatan perusahaan (dalam juta rupiah) dinyatakan oleh fungsi $f(x) = 2x^3 + 2x^2 + 40x$, sedangkan modal produksi yang dikeluarkan perusahaan (dalam juta rupiah) dinyatakan oleh fungsi $c(x) = x^3 + 6x^2 + 15x + 150$, dengan $x$ menyatakan jumlah barang yang dijual (dalam satuan ratus unit).',
     questionText:
-      'Agar perusahaan tidak mengalami kerugian ($f(x) \\ge c(x)$), jumlah penjualan produk minimal yang harus dicapai adalah ....',
+      'Penjualan minimal agar perusahaan tidak mengalami kerugian adalah ....',
     options: [
       { id: 'A', text: '$400\\text{ unit}$' },
       { id: 'B', text: '$500\\text{ unit}$' },
@@ -217,20 +228,21 @@ export const questionsData: Question[] = [
     ],
     correctAnswer: 'B',
     solutionSteps: [
-      'Perusahaan tidak merugi jika keuntungan $P(x) = f(x) - c(x) \\ge 0$:',
-      '$$P(x) = (2x^3 + 2x^2 + 40x) - (x^3 + 6x^2 + 15x + 150) = x^3 - 4x^2 + 25x - 150$$',
-      'Kelompokkan suku-suku untuk memfaktorkan $P(x)$:',
-      '$$P(x) = x^2(x - 4) + 25(x - 6)$$',
-      'Uji pembagi bulat dari $150$, yaitu $x = 5$:',
-      '$$P(5) = 5^3 - 4(5^2) + 25(5) - 150 = 125 - 100 + 125 - 150 = 0$$',
-      'Faktorkan dengan $(x - 5)$: $P(x) = (x - 5)(x^2 + x + 30)$.',
-      'Karena diskriminan $x^2 + x + 30$ adalah $D = 1 - 120 = -119 < 0$ (definit positif), maka $P(x) \\ge 0 \\iff x \\ge 5$.',
-      'Karena $x$ dalam ratusan unit, penjualan minimal adalah $5 \\times 100 = 500\\text{ unit}$.',
+      'Syarat agar perusahaan tidak mengalami kerugian adalah pendapatan lebih besar atau sama dengan modal produksi: $f(x) \\ge c(x)$.',
+      '$$2x^3 + 2x^2 + 40x \\ge x^3 + 6x^2 + 15x + 150$$',
+      '$$x^3 - 4x^2 + 25x - 150 \\ge 0$$',
+      'Cari pembuat nol dari persamaan $P(x) = x^3 - 4x^2 + 25x - 150 = 0$. Uji nilai $x = 5$:',
+      '$$P(5) = 5^3 - 4(5)^2 + 25(5) - 150 = 125 - 100 + 125 - 150 = 0$$',
+      'Faktorkan polinomial dengan pembagian Horner:',
+      '$$P(x) = (x - 5)(x^2 + x + 30) \\ge 0$$',
+      'Periksa diskriminan faktor kuadrat $x^2 + x + 30$: $D = 1^2 - 4(1)(30) = -119 < 0$. Karena $a > 0$ dan $D < 0$, faktor kuadrat definit positif untuk semua $x \\in \\mathbb{R}$.',
+      'Sehingga pertidaksamaan hanya ditentukan oleh faktor linear: $x - 5 \\ge 0 \\implies x \\ge 5$.',
+      'Karena $x$ dalam satuan ratus unit, penjualan minimal adalah $5 \\times 100 = 500\\text{ unit}$.',
     ],
   },
 
   // =========================================================================
-  // 8. Polinomial — Akar-akar Persamaan Kubik
+  // 8. Polinomial — Akar Rasional g(x) = 0
   // =========================================================================
   {
     id: 'siaga2-q8',
@@ -238,517 +250,442 @@ export const questionsData: Question[] = [
     packageId: 'siaga-2',
     topic: 'Polinomial',
     subtopic: 'Teorema Faktor dan Akar Rasional',
-    type: 'single',
+    type: 'multiple',
     stimulus:
-      'Diketahui suku banyak berderajat tiga $g(x) = x^3 + 16x^2 + 83x + 140$.',
+      'Diketahui suku banyak derajat tiga $g(x) = x^3 + 16x^2 + 83x + 140$. Nilai-nilai $x$ yang mengakibatkan $g(x) = 0$ dicari untuk menentukan titik potong kurva terhadap sumbu-$x$.',
     questionText:
-      'Akar-akar dari persamaan suku banyak $g(x) = 0$ adalah ....',
+      'Tentukan semua pernyataan berikut yang benar berdasarkan informasi tersebut! (Jawaban benar lebih dari satu)',
     options: [
-      { id: 'A', text: '$-7, -5, -4$' },
-      { id: 'B', text: '$-7, -5, 4$' },
-      { id: 'C', text: '$-7, 5, -4$' },
-      { id: 'D', text: '$7, -5, -4$' },
-      { id: 'E', text: '$7, 5, 4$' },
+      { id: 'A', text: 'Nilai $x$ yang memenuhi adalah $-7$.' },
+      { id: 'B', text: 'Nilai $x$ yang memenuhi adalah $-6$.' },
+      { id: 'C', text: 'Nilai $x$ yang memenuhi adalah $-5$.' },
+      { id: 'D', text: 'Nilai $x$ yang memenuhi adalah $-4$.' },
+      { id: 'E', text: 'Nilai $x$ yang memenuhi adalah $-2$.' },
     ],
-    correctAnswer: 'A',
+    correctAnswer: ['A', 'C', 'D'],
     solutionSteps: [
-      'Karena semua koefisien $g(x) = x^3 + 16x^2 + 83x + 140$ bernilai positif, semua akar realnya pasti negatif.',
-      'Uji faktor dari $140$, misalnya $x = -4$:',
+      'Gunakan Teorema Akar Rasional: calon akar riil dari persamaan suku banyak dengan semua koefisien positif harus bernilai negatif.',
+      'Uji calon akar rasional pembagi $140$:',
+      '• Uji $x = -4$:',
       '$$g(-4) = (-4)^3 + 16(-4)^2 + 83(-4) + 140 = -64 + 256 - 332 + 140 = 0$$',
-      'Bagi $g(x)$ dengan $(x + 4)$ menggunakan skema Horner:',
-      '$$g(x) = (x + 4)(x^2 + 12x + 35) = (x + 4)(x + 5)(x + 7) = 0$$',
-      'Jadi, akar-akar persamaan $g(x) = 0$ adalah $-7, -5, -4$.',
+      'Karena bernilai $0$, maka $(x + 4)$ adalah faktor dari $g(x)$.',
+      'Lakukan pembagian Horner untuk membagi $g(x)$ dengan $(x + 4)$:',
+      '$$g(x) = (x + 4)(x^2 + 12x + 35)$$',
+      'Faktorkan persamaan kuadrat hasil bagi:',
+      '$$x^2 + 12x + 35 = (x + 5)(x + 7) = 0$$',
+      'Diperoleh seluruh akar persamaan $g(x) = 0$ adalah $x = -4$, $x = -5$, dan $x = -7$.',
+      'Oleh karena itu, opsi A ($-7$), C ($-5$), dan D ($-4$) bernilai BENAR.',
     ],
   },
 
   // =========================================================================
-  // 9. Matriks — Aturan Cramer pada Koperasi Sekolah (Hari Rabu)
+  // 9. Matriks — Penjualan Koperasi Hari Senin
   // =========================================================================
   {
     id: 'siaga2-q9',
     number: 9,
     packageId: 'siaga-2',
     topic: 'Matriks',
-    subtopic: 'Determinan Matriks & Aturan Cramer',
+    subtopic: 'Perkalian Matriks dalam Konteks Kontekstual',
     type: 'single',
     stimulus:
-      'Suatu koperasi menjual buku tulis, pena, dan penggaris kepada anggota dan nonanggota. Data banyak barang yang dibeli pada hari Senin dan daftar harga (dalam ribuan rupiah) disajikan dalam matriks Barang $= \\begin{bmatrix} 12 & 10 & 6 \\\\ 15 & 11 & 9 \\end{bmatrix}$ (baris: Anggota, Nonanggota; kolom: Buku tulis, Pena, Penggaris) dan Harga $= \\begin{bmatrix} 4 & 5 \\\\ 2 & 3 \\\\ 3 & 4 \\end{bmatrix}$ (kolom: Anggota, Nonanggota). Pada hari Rabu, total penjualan buku tulis ($x$) dan pena ($y$) kepada anggota sebesar $56$ ribu rupiah dan kepada nonanggota sebesar $79$ ribu rupiah.',
+      'Di sebuah sekolah, terdapat dua kelompok siswa yang aktif berbelanja perlengkapan belajar di koperasi, yaitu kelompok anggota dan kelompok nonanggota. Matriks berikut menunjukkan data penjualan hari Senin:\n\n' +
+      '| Kelompok | Buku Tulis | Pena | Penggaris |\n' +
+      '| :--- | :---: | :---: | :---: |\n' +
+      '| Anggota | $12$ | $10$ | $4$ |\n' +
+      '| Nonanggota | $15$ | $11$ | $5$ |\n\n' +
+      'Daftar harga satuan barang (dalam ribuan rupiah):\n\n' +
+      '| Status Siswa | Buku Tulis | Pena | Penggaris |\n' +
+      '| :--- | :---: | :---: | :---: |\n' +
+      '| Anggota | $4$ | $2$ | $3$ |\n' +
+      '| Nonanggota | $5$ | $3$ | $4$ |',
     questionText:
-      'Nilai $x$ dan $y$ berdasarkan aturan determinan Cramer adalah ....',
+      'Pendapatan koperasi dari penjualan buku tulis dan pena pada hari Senin dari kelompok anggota dan nonanggota adalah ....',
     options: [
-      {
-        id: 'A',
-        text: '$x = \\frac{\\begin{vmatrix} 56 & 2 \\\\ 79 & 3 \\end{vmatrix}}{\\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix}} = 5 \\text{ dan } y = \\frac{\\begin{vmatrix} 4 & 56 \\\\ 5 & 79 \\end{vmatrix}}{\\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix}} = 18$',
-      },
-      {
-        id: 'B',
-        text: '$x = \\frac{\\begin{vmatrix} 2 & 56 \\\\ 3 & 79 \\end{vmatrix}}{\\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix}} = -5 \\text{ dan } y = \\frac{\\begin{vmatrix} 56 & 4 \\\\ 79 & 5 \\end{vmatrix}}{\\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix}} = -18$',
-      },
-      {
-        id: 'C',
-        text: '$x = \\frac{\\begin{vmatrix} 56 & 4 \\\\ 79 & 5 \\end{vmatrix}}{\\begin{vmatrix} 4 & 5 \\\\ 2 & 3 \\end{vmatrix}} = 18 \\text{ dan } y = \\frac{\\begin{vmatrix} 2 & 56 \\\\ 3 & 79 \\end{vmatrix}}{\\begin{vmatrix} 4 & 5 \\\\ 2 & 3 \\end{vmatrix}} = 5$',
-      },
-      {
-        id: 'D',
-        text: '$x = \\frac{\\begin{vmatrix} 56 & 3 \\\\ 79 & 2 \\end{vmatrix}}{\\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix}} = 8 \\text{ dan } y = \\frac{\\begin{vmatrix} 4 & 56 \\\\ 5 & 79 \\end{vmatrix}}{\\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix}} = 12$',
-      },
-      {
-        id: 'E',
-        text: '$x = \\frac{\\begin{vmatrix} 56 & 2 \\\\ 79 & 3 \\end{vmatrix}}{\\begin{vmatrix} 4 & 3 \\\\ 5 & 2 \\end{vmatrix}} = 10 \\text{ dan } y = \\frac{\\begin{vmatrix} 4 & 56 \\\\ 5 & 79 \\end{vmatrix}}{\\begin{vmatrix} 4 & 3 \\\\ 5 & 2 \\end{vmatrix}} = 8$',
-      },
+      { id: 'A', text: '$\\text{Rp}176.000,00$' },
+      { id: 'B', text: '$\\text{Rp}184.000,00$' },
+      { id: 'C', text: '$\\text{Rp}192.000,00$' },
+      { id: 'D', text: '$\\text{Rp}200.000,00$' },
+      { id: 'E', text: '$\\text{Rp}210.000,00$' },
     ],
     correctAnswer: 'A',
     solutionSteps: [
-      'Harga buku tulis dan pena untuk Anggota adalah $4$ dan $2$ (ribu rupiah), sedangkan untuk Nonanggota adalah $5$ dan $3$ (ribu rupiah).',
-      'Sistem persamaan linear hari Rabu adalah: $4x + 2y = 56$ dan $5x + 3y = 79$, atau $\\begin{bmatrix} 4 & 2 \\\\ 5 & 3 \\end{bmatrix}\\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 56 \\\\ 79 \\end{bmatrix}$.',
-      'Berdasarkan aturan Cramer, determinan utama $D = \\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix} = 12 - 10 = 2$.',
-      '$$x = \\frac{D_x}{D} = \\frac{\\begin{vmatrix} 56 & 2 \\\\ 79 & 3 \\end{vmatrix}}{\\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix}} = \\frac{168 - 158}{2} = \\frac{10}{2} = 5$$',
-      '$$y = \\frac{D_y}{D} = \\frac{\\begin{vmatrix} 4 & 56 \\\\ 5 & 79 \\end{vmatrix}}{\\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix}} = \\frac{316 - 280}{2} = \\frac{36}{2} = 18$$',
+      'Hitung pendapatan dari penjualan buku tulis dan pena untuk kelompok anggota:',
+      '$$\\text{Pendapatan Anggota} = (12 \\times \\text{Rp}4.000) + (10 \\times \\text{Rp}2.000) = \\text{Rp}48.000 + \\text{Rp}20.000 = \\text{Rp}68.000$$',
+      'Hitung pendapatan dari penjualan buku tulis dan pena untuk kelompok nonanggota:',
+      '$$\\text{Pendapatan Nonanggota} = (15 \\times \\text{Rp}5.000) + (11 \\times \\text{Rp}3.000) = \\text{Rp}75.000 + \\text{Rp}33.000 = \\text{Rp}108.000$$',
+      'Total pendapatan hari Senin dari kedua kelompok:',
+      '$$\\text{Total Pendapatan} = \\text{Rp}68.000 + \\text{Rp}108.000 = \\text{Rp}176.000,00$$',
+      'Dalam format matriks baris dan kolom:\n$$\\begin{pmatrix} 12 & 10 \\end{pmatrix}\\begin{pmatrix} 4 \\\\ 2 \\end{pmatrix} + \\begin{pmatrix} 15 & 11 \\end{pmatrix}\\begin{pmatrix} 5 \\\\ 3 \\end{pmatrix} = 68 + 108 = 176\\text{ (ribu rupiah)}$$',
     ],
   },
 
   // =========================================================================
-  // 10. Matriks — Pendapatan Koperasi Hari Senin (Buku Tulis & Pena)
+  // 10. Matriks — Aturan Cramer Hari Rabu
   // =========================================================================
   {
     id: 'siaga2-q10',
     number: 10,
     packageId: 'siaga-2',
     topic: 'Matriks',
-    subtopic: 'Perkalian Matriks dalam Konteks Kontekstual',
+    subtopic: 'Aturan Determinan Cramer',
     type: 'single',
     stimulus:
-      'Suatu koperasi mencatat banyak barang yang dibeli pada hari Senin dan daftar harga (dalam ribuan rupiah) dalam matriks Banyak Barang $= \\begin{bmatrix} 12 & 10 & 6 \\\\ 15 & 11 & 9 \\end{bmatrix}$ (baris: Anggota, Nonanggota; kolom: Buku tulis, Pena, Penggaris) dan Harga $= \\begin{bmatrix} 4 & 5 \\\\ 2 & 3 \\\\ 3 & 4 \\end{bmatrix}$ (baris: Buku tulis, Pena, Penggaris; kolom: Anggota, Nonanggota).',
+      'Pada hari Rabu, anggota koperasi membeli buku tulis dan pena dengan total pembayaran $56$ (ribu rupiah), sedangkan nonanggota koperasi membeli buku tulis dan pena dengan total pembayaran $79$ (ribu rupiah).\n\n' +
+      'Harga satuan buku tulis dan pena:\n' +
+      '• Anggota: Buku tulis $= 4$ ribu, Pena $= 2$ ribu\n' +
+      '• Nonanggota: Buku tulis $= 5$ ribu, Pena $= 3$ ribu\n\n' +
+      'Variabel $x$ menyatakan banyak buku tulis yang terjual dan $y$ menyatakan banyak pena yang terjual.',
     questionText:
-      'Total pendapatan koperasi dari hasil penjualan buku tulis dan pena pada hari Senin dari anggota dan nonanggota adalah ....',
+      'Berdasarkan data tersebut, nilai $x$ dan $y$ yang memenuhi sistem persamaan adalah ....',
     options: [
-      { id: 'A', text: '$\\text{Rp}176.000,00$' },
-      { id: 'B', text: '$\\text{Rp}186.000,00$' },
-      { id: 'C', text: '$\\text{Rp}198.000,00$' },
-      { id: 'D', text: '$\\text{Rp}216.000,00$' },
-      { id: 'E', text: '$\\text{Rp}230.000,00$' },
+      { id: 'A', text: '$x = 5$ dan $y = 18$' },
+      { id: 'B', text: '$x = 6$ dan $y = 16$' },
+      { id: 'C', text: '$x = 7$ dan $y = 14$' },
+      { id: 'D', text: '$x = 8$ dan $y = 12$' },
+      { id: 'E', text: '$x = 9$ dan $y = 10$' },
     ],
     correctAnswer: 'A',
     solutionSteps: [
-      'Ambil submatriks $2 \\times 2$ untuk penjualan buku tulis dan pena saja:',
-      '• Anggota membeli $12$ buku tulis ($\\text{Rp}4.000$) dan $10$ pena ($\\text{Rp}2.000$):',
-      '$$P_{\\text{anggota}} = 12(4) + 10(2) = 48 + 20 = 68\\text{ ribu rupiah}$$',
-      '• Nonanggota membeli $15$ buku tulis ($\\text{Rp}5.000$) dan $11$ pena ($\\text{Rp}3.000$):',
-      '$$P_{\\text{nonanggota}} = 15(5) + 11(3) = 75 + 33 = 108\\text{ ribu rupiah}$$',
-      'Jumlahkan keduanya: $68 + 108 = 176\\text{ ribu rupiah} = \\text{Rp}176.000,00$.',
+      'Susun sistem persamaan linear dari informasi transaksi hari Rabu:',
+      '$$\\begin{cases} 4x + 2y = 56 \\\\ 5x + 3y = 79 \\end{cases}$$',
+      'Tuliskan dalam persamaan matriks koefisien: $\\begin{pmatrix} 4 & 2 \\\\ 5 & 3 \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 56 \\\\ 79 \\end{pmatrix}$.',
+      'Hitung determinan matriks utama $D$:',
+      '$$D = \\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix} = 4(3) - 2(5) = 12 - 10 = 2$$',
+      'Hitung determinan variabel $x$ ($D_x$):',
+      '$$D_x = \\begin{vmatrix} 56 & 2 \\\\ 79 & 3 \\end{vmatrix} = 56(3) - 2(79) = 168 - 158 = 10$$',
+      '$$x = \\frac{D_x}{D} = \\frac{10}{2} = 5$$',
+      'Hitung determinan variabel $y$ ($D_y$):',
+      '$$D_y = \\begin{vmatrix} 4 & 56 \\\\ 5 & 79 \\end{vmatrix} = 4(79) - 56(5) = 316 - 280 = 36$$',
+      '$$y = \\frac{D_y}{D} = \\frac{36}{2} = 18$$',
+      'Jadi, diperoleh $x = 5$ (banyak buku tulis) dan $y = 18$ (banyak pena).',
     ],
   },
 
   // =========================================================================
-  // 11. Matriks — Koperasi Hari Jumat Diskon 10% (Tabel Benar/Salah)
+  // 11. Matriks — Evaluasi Diskon 10% Hari Jumat (Tabel B/S)
   // =========================================================================
   {
     id: 'siaga2-q11',
     number: 11,
     packageId: 'siaga-2',
     topic: 'Matriks',
-    subtopic: 'Aplikasi SPLDV & Matriks dengan Diskon',
+    subtopic: 'Aplikasi SPLDV & Diskon Koperasi',
     type: 'table',
     stimulus:
-      'Harga normal buku tulis dan pena untuk anggota adalah $\\text{Rp}4.000,00$ dan $\\text{Rp}2.000,00$, sedangkan untuk nonanggota $\\text{Rp}5.000,00$ dan $\\text{Rp}3.000,00$. Pada hari Jumat, khusus anggota mendapat diskon $10\\%$. Total penjualan buku tulis ($x$) dan pena ($y$) pada hari Jumat untuk anggota adalah $\\text{Rp}72.000,00$ dan untuk nonanggota (jumlah barang sama) adalah $\\text{Rp}110.000,00$.',
+      'Pada hari Jumat diberikan diskon sebesar $10\\%$ untuk anggota koperasi yang membeli buku tulis, pena, atau penggaris. Harga normal untuk anggota adalah buku tulis $\\text{Rp}4.000$, pena $\\text{Rp}2.000$, dan penggaris $\\text{Rp}3.000$. Setelah diskon $10\\%$, harga untuk anggota menjadi: buku tulis $\\text{Rp}3.600$ dan pena $\\text{Rp}1.800$.\n\n' +
+      'Harga untuk nonanggota tetap normal: buku tulis $\\text{Rp}5.000$ dan pena $\\text{Rp}3.000$.\n\n' +
+      'Pada hari Jumat tersebut diperoleh data transaksi:\n' +
+      '• Anggota koperasi membeli buku tulis dan pena dengan total pembayaran $\\text{Rp}72.000,00$.\n' +
+      '• Nonanggota koperasi membeli buku tulis dan pena dengan total pembayaran $\\text{Rp}110.000,00$.',
     questionText:
-      'Tentukan kebenaran setiap pernyataan berikut terkait penjualan buku tulis dan pena pada hari Jumat!',
+      'Tentukan Benar atau Salah untuk setiap pernyataan berikut dengan memberi tanda centang (✓)!',
     statements: [
       {
-        id: 'S1',
-        text: 'Banyak buku tulis yang terjual adalah $10\\text{ buah}$.',
+        id: 's1',
+        text: 'Banyak buku tulis yang terjual sebanyak 10 buah.',
         isTrue: true,
       },
       {
-        id: 'S2',
-        text: 'Banyak pena yang terjual adalah $20\\text{ buah}$.',
+        id: 's2',
+        text: 'Banyak pena yang terjual sebanyak 20 buah.',
         isTrue: true,
       },
       {
-        id: 'S3',
-        text: 'Selisih banyak buku tulis dan pena yang terjual adalah $10\\text{ buah}$.',
+        id: 's3',
+        text: 'Selisih buku tulis dan pena yang terjual pada hari Jumat adalah 10 buah.',
         isTrue: true,
       },
     ],
+    correctAnswer: { s1: true, s2: true, s3: true },
     solutionSteps: [
-      'Karena anggota mendapat diskon $10\\%$, maka anggota membayar $90\\%$ dari harga normal:',
-      '$$0,9(4.000x + 2.000y) = 72.000 \\implies 4x + 2y = 80 \\implies 2x + y = 40$$',
-      'Persamaan untuk nonanggota (tanpa diskon):',
-      '$$5.000x + 3.000y = 110.000 \\implies 5x + 3y = 110$$',
-      'Eliminasi $y$: kalikan persamaan pertama dengan $3$ menjadi $6x + 3y = 120$, lalu kurangkan dengan $5x + 3y = 110$:',
-      '$$x = 120 - 110 = 10 \\implies y = 40 - 2(10) = 20$$',
-      'Selisih banyak buku tulis dan pena adalah $|20 - 10| = 10\\text{ buah}$. Ketiga pernyataan bernilai Benar.',
+      'Modelkan sistem persamaan linear dari data hari Jumat:',
+      '• Transaksi Anggota: $3.600x + 1.800y = 72.000 \\implies 2x + y = 40$',
+      '• Transaksi Nonanggota: $5.000x + 3.000y = 110.000 \\implies 5x + 3y = 110$',
+      'Eliminasi variabel $y$: Kalikan persamaan pertama dengan $3$:',
+      '$$6x + 3y = 120$$',
+      'Kurangkan dengan persamaan kedua:',
+      '$$(6x + 3y) - (5x + 3y) = 120 - 110 \\implies x = 10$$',
+      'Substitusikan $x = 10$ ke persamaan $2x + y = 40$:',
+      '$$2(10) + y = 40 \\implies 20 + y = 40 \\implies y = 20$$',
+      'Evaluasi kebenaran setiap pernyataan:',
+      '1. Banyak buku tulis ($x$) terjual sebanyak $10$ buah $\\implies$ **Benar**.',
+      '2. Banyak pena ($y$) terjual sebanyak $20$ buah $\\implies$ **Benar**.',
+      '3. Selisih buku tulis dan pena $= |20 - 10| = 10$ buah $\\implies$ **Benar**.',
     ],
   },
 
   // =========================================================================
-  // 12. Matriks — Persamaan Matriks Hari Jumat (Diskon 10% Anggota)
+  // 12. Matriks — Analisis Kesalahan Invers Matriks Tarif Laundry
   // =========================================================================
   {
     id: 'siaga2-q12',
     number: 12,
     packageId: 'siaga-2',
     topic: 'Matriks',
-    subtopic: 'Pemodelan Matriks dari Masalah Kontekstual',
+    subtopic: 'Analisis Kesalahan Invers Matriks Ordo 2x2',
     type: 'single',
     stimulus:
-      'Mengacu pada data koperasi hari Jumat: harga normal buku tulis dan pena untuk anggota adalah $4$ dan $2$ (ribu rupiah) dengan diskon $10\\%$, sedangkan untuk nonanggota adalah $5$ dan $3$ (ribu rupiah) tanpa diskon. Total pembayaran anggota adalah $72$ ribu rupiah dan nonanggota $110$ ribu rupiah.',
+      'Usaha laundry menyediakan dua jenis layanan, yaitu laundry reguler dan laundry ekspres. Pada suatu hari diperoleh data transaksi sebagai berikut:\n' +
+      '• Pak Yana mencuci $3\\text{ kg}$ pakaian dengan layanan reguler dan $2\\text{ kg}$ pakaian dengan layanan ekspres dengan total biaya $\\text{Rp}34.000,00$.\n' +
+      '• Bu Mail mencuci $5\\text{ kg}$ pakaian dengan layanan reguler dan $3\\text{ kg}$ pakaian dengan layanan ekspres dengan total biaya $\\text{Rp}53.000,00$.\n\n' +
+      'Pemilik laundry memodelkan permasalahan tersebut ke dalam bentuk matriks. Variabel $x$ menyatakan tarif reguler/kg dan $y$ menyatakan tarif ekspres/kg:\n' +
+      '$$\\begin{pmatrix} 3 & 2 \\\\ 5 & 3 \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 34.000 \\\\ 53.000 \\end{pmatrix}$$\n' +
+      'Pemilik menyelesaikan menggunakan metode invers matriks dan menuliskan:\n' +
+      '$$\\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 3 & -2 \\\\ -5 & 3 \\end{pmatrix} \\begin{pmatrix} 34.000 \\\\ 53.000 \\end{pmatrix}$$',
     questionText:
-      'Persamaan matriks yang tepat untuk menentukan banyak buku tulis ($x$) dan pena ($y$) sebelum disederhanakan adalah ....',
+      'Namun, terdapat kesalahan pada penyelesaian menggunakan metode invers matriks tersebut. Bagian yang salah dari operasi matriks tersebut adalah ....',
     options: [
       {
         id: 'A',
-        text: '$\\begin{bmatrix} 3,6 & 1,8 \\\\ 5 & 3 \\end{bmatrix}\\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 72 \\\\ 110 \\end{bmatrix}$',
+        text: 'Matriks adjoin seharusnya dikalikan dengan faktor $\\frac{1}{\\det(A)} = -1$, sehingga invers yang benar adalah $\\begin{pmatrix} -3 & 2 \\\\ 5 & -3 \\end{pmatrix}$.',
       },
       {
         id: 'B',
-        text: '$\\begin{bmatrix} 4 & 2 \\\\ 5 & 3 \\end{bmatrix}\\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 72 \\\\ 110 \\end{bmatrix}$',
+        text: 'Matriks adjoin seharusnya semua bertanda negatif.',
       },
       {
         id: 'C',
-        text: '$\\begin{bmatrix} 3,6 & 5 \\\\ 1,8 & 3 \\end{bmatrix}\\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 72 \\\\ 110 \\end{bmatrix}$',
+        text: 'Elemen diagonal utama pada adjoin seharusnya tidak ditukar posisinya.',
       },
       {
         id: 'D',
-        text: '$\\begin{bmatrix} 4,4 & 2,2 \\\\ 5 & 3 \\end{bmatrix}\\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 72 \\\\ 110 \\end{bmatrix}$',
+        text: 'Matriks konstanta biaya seharusnya berada di ruas kiri sebelum matriks koefisien.',
       },
       {
         id: 'E',
-        text: '$\\begin{bmatrix} 4 & 2 \\\\ 4,5 & 2,7 \\end{bmatrix}\\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 72 \\\\ 110 \\end{bmatrix}$',
+        text: 'Determinan matriks koefisien bernilai nol sehingga sistem tidak memiliki invers.',
       },
     ],
     correctAnswer: 'A',
     solutionSteps: [
-      'Harga anggota setelah diskon $10\\%$ (dikalikan $0,9$):',
-      '• Buku tulis anggota: $0,9 \\times 4 = 3,6$ ribu rupiah.',
-      '• Pena anggota: $0,9 \\times 2 = 1,8$ ribu rupiah.',
-      'Harga nonanggota tetap $5$ ribu dan $3$ ribu rupiah.',
-      'Maka sistem persamaannya dalam bentuk matriks adalah:',
-      '$$\\begin{bmatrix} 3,6 & 1,8 \\\\ 5 & 3 \\end{bmatrix}\\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 72 \\\\ 110 \\end{bmatrix}$$',
+      'Matriks koefisien sistem persamaan adalah $A = \\begin{pmatrix} 3 & 2 \\\\ 5 & 3 \\end{pmatrix}$.',
+      'Hitung determinan matriks $A$:',
+      '$$\\det(A) = ad - bc = 3(3) - 2(5) = 9 - 10 = -1$$',
+      'Tentukan matriks adjoin dari matriks $2 \\times 2$:',
+      '$$\\text{Adj}(A) = \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix} = \\begin{pmatrix} 3 & -2 \\\\ -5 & 3 \\end{pmatrix}$$',
+      'Rumus invers matriks adalah $A^{-1} = \\frac{1}{\\det(A)} \\text{Adj}(A)$:',
+      '$$A^{-1} = \\frac{1}{-1} \\begin{pmatrix} 3 & -2 \\\\ -5 & 3 \\end{pmatrix} = \\begin{pmatrix} -3 & 2 \\\\ 5 & -3 \\end{pmatrix}$$',
+      'Kesalahan pemilik laundry adalah langsung mengalikan adjoin tanpa mengalikan dengan faktor $\\frac{1}{\\det(A)} = \\frac{1}{-1} = -1$.',
     ],
   },
 
   // =========================================================================
-  // 13. Matriks — Harga Apel dan Jeruk (Pak Yana & Bu Mail)
+  // 13. Geometri Analitik — Persamaan Lingkaran Pusat (3, 5) r = 5
   // =========================================================================
   {
     id: 'siaga2-q13',
     number: 13,
     packageId: 'siaga-2',
-    topic: 'Matriks',
-    subtopic: 'Penyelesaian SPLDV dengan Invers Matriks',
-    type: 'single',
-    stimulus:
-      'Di sebuah toko buah, Pak Yana membeli $3\\text{ kg}$ apel dan $2\\text{ kg}$ jeruk seharga $\\text{Rp}34.000,00$. Di toko yang sama, Bu Mail membeli $5\\text{ kg}$ apel dan $3\\text{ kg}$ jeruk seharga $\\text{Rp}53.000,00$. Harga $1\\text{ kg}$ apel dinyatakan dengan $x$ dan harga $1\\text{ kg}$ jeruk dinyatakan dengan $y$.',
-    questionText:
-      'Harga $1\\text{ kg}$ apel ($x$) dan $1\\text{ kg}$ jeruk ($y$) berturut-turut adalah ....',
-    options: [
-      { id: 'A', text: '$\\text{Rp}4.000,00 \\text{ dan } \\text{Rp}11.000,00$' },
-      { id: 'B', text: '$\\text{Rp}5.000,00 \\text{ dan } \\text{Rp}9.500,00$' },
-      { id: 'C', text: '$\\text{Rp}6.000,00 \\text{ dan } \\text{Rp}8.000,00$' },
-      { id: 'D', text: '$\\text{Rp}7.000,00 \\text{ dan } \\text{Rp}6.500,00$' },
-      { id: 'E', text: '$\\text{Rp}8.000,00 \\text{ dan } \\text{Rp}5.000,00$' },
-    ],
-    correctAnswer: 'A',
-    solutionSteps: [
-      'Susun persamaan matriks dari belanjaan Pak Yana dan Bu Mail:',
-      '$$\\begin{pmatrix} 3 & 2 \\\\ 5 & 3 \\end{pmatrix}\\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 34.000 \\\\ 53.000 \\end{pmatrix}$$',
-      'Hitung determinan matriks koefisien: $\\det(A) = 3(3) - 2(5) = 9 - 10 = -1$.',
-      'Gunakan rumus invers matriks $A^{-1} = \\frac{1}{-1}\\begin{pmatrix} 3 & -2 \\\\ -5 & 3 \\end{pmatrix} = \\begin{pmatrix} -3 & 2 \\\\ 5 & -3 \\end{pmatrix}$:',
-      '$$\\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} -3 & 2 \\\\ 5 & -3 \\end{pmatrix}\\begin{pmatrix} 34.000 \\\\ 53.000 \\end{pmatrix} = \\begin{pmatrix} -102.000 + 106.000 \\\\ 170.000 - 159.000 \\end{pmatrix} = \\begin{pmatrix} 4.000 \\\\ 11.000 \\end{pmatrix}$$',
-      'Jadi, harga $1\\text{ kg}$ apel adalah $\\text{Rp}4.000,00$ dan $1\\text{ kg}$ jeruk adalah $\\text{Rp}11.000,00$.',
-    ],
-  },
-
-  // =========================================================================
-  // 14. Matriks — Evaluasi Kesalahan Invers Matriks Pemilik Toko
-  // =========================================================================
-  {
-    id: 'siaga2-q14',
-    number: 14,
-    packageId: 'siaga-2',
-    topic: 'Matriks',
-    subtopic: 'Analisis Kesalahan Invers Matriks Ordo 2x2',
-    type: 'single',
-    stimulus:
-      'Dari sistem persamaan $3x + 2y = 34.000$ dan $5x + 3y = 53.000$, pemilik toko menuliskan model matriks untuk mencari harga apel ($x$) dan jeruk ($y$) sebagai berikut: $\\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 3 & -2 \\\\ -5 & 3 \\end{pmatrix}\\begin{pmatrix} 34.000 \\\\ 53.000 \\end{pmatrix}$. Ketika dihitung, hasilnya bernilai negatif sehingga pemilik toko kebingungan.',
-    questionText:
-      'Bagian yang salah dari operasi matriks yang ditulis pemilik toko tersebut adalah ....',
-    options: [
-      {
-        id: 'A',
-        text: 'Nilai determinan matriks koefisien adalah $-1$, sehingga matriks adjoin seharusnya dikalikan $\\frac{1}{-1}$ menjadi $\\begin{pmatrix} -3 & 2 \\\\ 5 & -3 \\end{pmatrix}$.',
-      },
-      {
-        id: 'B',
-        text: 'Elemen diagonal utama $3$ dan $3$ seharusnya diubah tandanya menjadi $-3$ dan $-3$ saat menyusun adjoin.',
-      },
-      {
-        id: 'C',
-        text: 'Matriks kolom harga $\\begin{pmatrix} 34.000 \\\\ 53.000 \\end{pmatrix}$ seharusnya diletakkan di sebelah kiri matriks invers.',
-      },
-      {
-        id: 'D',
-        text: 'Nilai determinan matriks koefisien seharusnya $19$, sehingga wajib dibagi $19$.',
-      },
-      {
-        id: 'E',
-        text: 'Posisi baris pertama dan baris kedua pada matriks harga seharusnya ditukar terlebih dahulu.',
-      },
-    ],
-    correctAnswer: 'A',
-    solutionSteps: [
-      'Untuk matriks $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$, rumus inversnya adalah $A^{-1} = \\frac{1}{ad - bc}\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$.',
-      'Pada matriks $A = \\begin{pmatrix} 3 & 2 \\\\ 5 & 3 \\end{pmatrix}$, matriks adjoinnya memang $\\begin{pmatrix} 3 & -2 \\\\ -5 & 3 \\end{pmatrix}$.',
-      'Namun, determinannya adalah $\\det(A) = 3(3) - 2(5) = 9 - 10 = -1$ (bukan $+1$).',
-      'Pemilik toko lupa membagi matriks adjoin dengan determinan $-1$, sehingga tanda hasil akhir menjadi terbalik (negatif).',
-    ],
-  },
-
-  // =========================================================================
-  // 15. Irisan Kerucut — Persamaan Umum Lingkaran
-  // =========================================================================
-  {
-    id: 'siaga2-q15',
-    number: 15,
-    packageId: 'siaga-2',
     topic: 'Geometri Analitik',
     subtopic: 'Persamaan Lingkaran',
     type: 'single',
     questionText:
-      'Persamaan umum lingkaran yang berpusat di titik $(3, 5)$ dan memiliki jari-jari $5$ adalah ....',
+      'Persamaan lingkaran yang berpusat di titik $(3, 5)$ dan berjari-jari $5$ satuan panjang adalah ....',
     options: [
       { id: 'A', text: '$x^2 + y^2 - 6x - 10y + 9 = 0$' },
-      { id: 'B', text: '$x^2 + y^2 - 6x - 10y - 9 = 0$' },
-      { id: 'C', text: '$x^2 + y^2 + 6x + 10y + 9 = 0$' },
-      { id: 'D', text: '$x^2 + y^2 - 3x - 5y + 9 = 0$' },
-      { id: 'E', text: '$x^2 + y^2 - 6x - 10y + 25 = 0$' },
+      { id: 'B', text: '$x^2 + y^2 - 6x - 10y + 10 = 0$' },
+      { id: 'C', text: '$x^2 + y^2 - 6x - 10y + 11 = 0$' },
+      { id: 'D', text: '$x^2 + y^2 + 6x + 10y + 9 = 0$' },
+      { id: 'E', text: '$x^2 + y^2 - 10x - 6y + 9 = 0$' },
     ],
     correctAnswer: 'A',
     solutionSteps: [
-      'Gunakan persamaan baku lingkaran berpusat di $(a, b) = (3, 5)$ dengan jari-jari $r = 5$:',
+      'Gunakan persamaan baku lingkaran dengan pusat $(a, b)$ dan jari-jari $r$:',
+      '$$(x - a)^2 + (y - b)^2 = r^2$$',
+      'Substitusikan pusat $(a, b) = (3, 5)$ dan jari-jari $r = 5$:',
       '$$(x - 3)^2 + (y - 5)^2 = 5^2$$',
-      'Jabarkan bentuk kuadrat:',
-      '$$(x^2 - 6x + 9) + (y^2 - 10y + 25) = 25$$',
+      'Jabarkan kuadrat suku dua:',
+      '$$x^2 - 6x + 9 + y^2 - 10y + 25 = 25$$',
+      'Kurangkan kedua ruas dengan $25$:',
       '$$x^2 + y^2 - 6x - 10y + 9 = 0$$',
     ],
   },
 
   // =========================================================================
-  // 16. Limit & Geometri — Segitiga DOC dalam Setengah Lingkaran (Benar/Salah)
+  // 14. Limit & Trigonometri — Juring Setengah Lingkaran (Tabel B/S)
   // =========================================================================
   {
-    id: 'siaga2-q16',
-    number: 16,
+    id: 'siaga2-q14',
+    number: 14,
     packageId: 'siaga-2',
-    topic: 'Limit & Trigonometri',
-    subtopic: 'Geometri Lingkaran & Limit Trigonometri',
+    topic: 'Limit & Geometri',
+    subtopic: 'Juring Lingkaran & Limit Trigonometri',
     type: 'table',
     svgType: 'semicircle_triangle',
     stimulus:
-      'Perhatikan gambar setengah lingkaran berpusat di $O$ dengan diameter $AB$ dan jari-jari $r$. Titik $C$ dan $D$ terletak pada busur setengah lingkaran sehingga membentuk segitiga sama kaki $DOC$ ($OD = OC = r$) dengan kedua sudut alas $\\angle ODC = \\angle OCD = \\theta$.',
+      'Sebuah bangun datar berbentuk juring setengah lingkaran berpusat di $O$ dengan panjang jari-jari $r$. Terdapat segitiga $DOC$ dengan $C$ dan $D$ terletak pada busur $AB$, serta sudut $\\angle ODC = \\angle OCD = \\theta$.',
     questionText:
-      'Tentukan kebenaran setiap pernyataan berikut berdasarkan informasi pada gambar!',
+      'Berilah tanda centang (✓) pada pernyataan "Benar" atau "Salah" berdasarkan informasi tersebut!',
     statements: [
       {
-        id: 'S1',
-        text: 'Nilai $\\lim_{\\theta \\to \\frac{\\pi}{3}} \\frac{\\sin 2\\theta}{\\cos 3\\theta} = \\frac{1}{2}\\sqrt{3}$.',
+        id: 's1',
+        text: 'Nilai $\\lim_{\\theta \\to \\frac{\\pi}{6}} \\frac{\\sin 2\\theta}{\\cos 3\\theta}$ menuju tak hingga (terjadi pembagian dengan nol).',
+        isTrue: true,
+      },
+      {
+        id: 's2',
+        text: 'Besar $\\theta$ tidak memengaruhi luas segitiga DOC.',
         isTrue: false,
       },
       {
-        id: 'S2',
-        text: 'Besar sudut $\\theta$ tidak memengaruhi luas segitiga $DOC$.',
-        isTrue: false,
-      },
-      {
-        id: 'S3',
-        text: 'Besar sudut $\\theta$ memengaruhi panjang jari-jari lingkaran $r$.',
+        id: 's3',
+        text: 'Besar $\\theta$ memengaruhi panjang jari-jari lingkaran.',
         isTrue: false,
       },
     ],
+    correctAnswer: { s1: true, s2: false, s3: false },
     solutionSteps: [
-      'Evaluasi Pernyataan 1: Substitusikan $\\theta = \\frac{\\pi}{3}$ langsung ke dalam limit:',
-      '$$\\lim_{\\theta \\to \\frac{\\pi}{3}} \\frac{\\sin 2\\theta}{\\cos 3\\theta} = \\frac{\\sin\\left(\\frac{2\\pi}{3}\\right)}{\\cos(\\pi)} = \\frac{\\frac{1}{2}\\sqrt{3}}{-1} = -\\frac{1}{2}\\sqrt{3} \\neq \\frac{1}{2}\\sqrt{3} \\quad (\\text{Salah})$$',
-      'Evaluasi Pernyataan 2: Karena $\\angle ODC = \\angle OCD = \\theta$, maka sudut puncak $\\angle DOC = \\pi - 2\\theta$. Luas segitiga $DOC$ adalah $L = \\frac{1}{2} r^2 \\sin(\\pi - 2\\theta) = \\frac{1}{2} r^2 \\sin 2\\theta$, sehingga nilainya bergantung pada $\\theta$ (Salah).',
-      'Evaluasi Pernyataan 3: Panjang jari-jari lingkaran $r$ adalah ukuran tetap dari lingkaran tersebut dan tidak berubah meskipun posisi titik $C, D$ (sudut $\\theta$) berubah (Salah).',
+      'Analisis pernyataan 1:',
+      '$$\\lim_{\\theta \\to \\frac{\\pi}{6}} \\frac{\\sin 2\\theta}{\\cos 3\\theta}$$',
+      'Substitusikan $\\theta = \\frac{\\pi}{6}$:',
+      'Pembilang: $\\sin\\left(2 \\cdot \\frac{\\pi}{6}\\right) = \\sin\\left(\\frac{\\pi}{3}\\right) = \\frac{\\sqrt{3}}{2} \\ne 0$',
+      'Penyebut: $\\cos\\left(3 \\cdot \\frac{\\pi}{6}\\right) = \\cos\\left(\\frac{\\pi}{2}\\right) = 0$',
+      'Karena pembilang berhingga tak nol dan penyebut mendekati nol, limit tidak terdefinisi berhingga / menuju tak hingga $\\implies$ **Benar**.',
+      'Analisis pernyataan 2: Segitiga $DOC$ memiliki sudut $\\angle ODC = \\angle OCD = \\theta$, sehingga sudut pusat $\\angle DOC = 180^\\circ - 2\\theta$. Luasnya $L = \\frac{1}{2}r^2 \\sin(180^\\circ - 2\\theta) = \\frac{1}{2}r^2 \\sin 2\\theta$. Luas segitiga sangat bergantung pada sudut $\\theta$. Pernyataan "tidak memengaruhi" $\\implies$ **Salah**.',
+      'Analisis pernyataan 3: Jari-jari lingkaran $r$ bernilai tetap (konstan) dan merupakan dimensi lingkaran, tidak ditentukan oleh sudut $\\theta$ pada segitiga $\\implies$ **Salah**.',
     ],
   },
 
   // =========================================================================
-  // 17. Limit & Geometri — Rumus Luas Segitiga DOC
+  // 15. Limit Fungsi — Parameter m dan n
   // =========================================================================
   {
-    id: 'siaga2-q17',
-    number: 17,
-    packageId: 'siaga-2',
-    topic: 'Limit & Trigonometri',
-    subtopic: 'Luas Segitiga dalam Lingkaran',
-    type: 'single',
-    svgType: 'semicircle_triangle',
-    stimulus:
-      'Mengacu pada gambar setengah lingkaran berpusat di $O$ berjari-jari $r$, segitiga sama kaki $DOC$ memiliki sisi $OD = OC = r$ dan sudut alas $\\angle ODC = \\angle OCD = \\theta$.',
-    questionText:
-      'Rumus luas segitiga $DOC$ sebagai fungsi dari $\\theta$ beserta nilai limitnya saat $\\theta \\to \\frac{\\pi}{6}$ adalah ....',
-    options: [
-      { id: 'A', text: '$L(\\theta) = \\frac{1}{2}r^2\\sin 2\\theta \\text{ dan } \\lim_{\\theta \\to \\frac{\\pi}{6}} L(\\theta) = \\frac{1}{4}\\sqrt{3}\\,r^2$' },
-      { id: 'B', text: '$L(\\theta) = \\frac{1}{2}r^2\\sin \\theta \\text{ dan } \\lim_{\\theta \\to \\frac{\\pi}{6}} L(\\theta) = \\frac{1}{4}r^2$' },
-      { id: 'C', text: '$L(\\theta) = r^2\\cos 2\\theta \\text{ dan } \\lim_{\\theta \\to \\frac{\\pi}{6}} L(\\theta) = \\frac{1}{2}r^2$' },
-      { id: 'D', text: '$L(\\theta) = \\frac{1}{2}r^2\\cos \\theta \\text{ dan } \\lim_{\\theta \\to \\frac{\\pi}{6}} L(\\theta) = \\frac{1}{4}\\sqrt{3}\\,r^2$' },
-      { id: 'E', text: '$L(\\theta) = r^2\\sin 2\\theta \\text{ dan } \\lim_{\\theta \\to \\frac{\\pi}{6}} L(\\theta) = \\frac{1}{2}\\sqrt{3}\\,r^2$' },
-    ],
-    correctAnswer: 'A',
-    solutionSteps: [
-      'Jumlah sudut dalam $\\triangle DOC$ adalah $\\pi$, sehingga sudut pusat $\\angle DOC = \\pi - (\\theta + \\theta) = \\pi - 2\\theta$.',
-      'Gunakan rumus luas segitiga dengan dua sisi mengapit satu sudut:',
-      '$$L(\\theta) = \\frac{1}{2} \\cdot OD \\cdot OC \\cdot \\sin(\\angle DOC) = \\frac{1}{2} r^2 \\sin(\\pi - 2\\theta) = \\frac{1}{2} r^2 \\sin 2\\theta$$',
-      'Saat $\\theta \\to \\frac{\\pi}{6}$, diperoleh:',
-      '$$\\lim_{\\theta \\to \\frac{\\pi}{6}} \\frac{1}{2} r^2 \\sin 2\\theta = \\frac{1}{2} r^2 \\sin\\left(\\frac{\\pi}{3}\\right) = \\frac{1}{2} r^2 \\left(\\frac{1}{2}\\sqrt{3}\\right) = \\frac{1}{4}\\sqrt{3}\\,r^2$$',
-    ],
-  },
-
-  // =========================================================================
-  // 18. Limit Trigonometri — Menentukan Pasangan Parameter m dan n (PGK)
-  // =========================================================================
-  {
-    id: 'siaga2-q18',
-    number: 18,
+    id: 'siaga2-q15',
+    number: 15,
     packageId: 'siaga-2',
     topic: 'Limit Fungsi',
     subtopic: 'Parameter pada Limit Trigonometri',
     type: 'multiple',
     stimulus:
-      'Diketahui persamaan limit fungsi trigonometri berikut:\n$$\\lim_{x \\to 0} \\left(\\frac{\\sin mx}{2x^2 - 6x} \\cdot \\frac{x^2 - 8x}{\\tan nx}\\right) = 2$$',
+      'Diketahui limit fungsi trigonometri dengan parameter $m$ dan $n$:\n$$\\lim_{x \\to 0} \\left( \\frac{\\sin mx}{\\tan nx} \\cdot \\frac{x^2 - 8x}{2x^2 - 6x} \\right) = 2$$',
     questionText:
-      'Manakah di antara pasangan nilai $m$ dan $n$ berikut yang memenuhi persamaan limit tersebut? (Jawaban benar lebih dari satu)',
+      'Pilih pernyataan berikut yang benar untuk nilai $m$ dan $n$ yang memenuhi berdasarkan informasi tersebut! (Jawaban benar lebih dari satu)',
     options: [
-      { id: 'A', text: '$m = 3 \\text{ dan } n = 2$' },
-      { id: 'B', text: '$m = 2 \\text{ dan } n = 3$' },
-      { id: 'C', text: '$m = 6 \\text{ dan } n = 4$' },
-      { id: 'D', text: '$m = 4 \\text{ dan } n = 6$' },
-      { id: 'E', text: '$m = 9 \\text{ dan } n = 6$' },
+      { id: 'A', text: '$m = 3$ dan $n = 2$.' },
+      { id: 'B', text: '$m = 2$ dan $n = 3$.' },
+      { id: 'C', text: '$m = 4$ dan $n = 6$.' },
+      { id: 'D', text: '$m = 6$ dan $n = 4$.' },
+      { id: 'E', text: '$m = 9$ dan $n = 6$.' },
     ],
-    correctAnswer: ['A', 'C', 'E'],
+    correctAnswer: ['A', 'D', 'E'],
     solutionSteps: [
-      'Faktorkan $x$ dari bentuk aljabar pada pembilang dan penyebut:',
-      '$$\\lim_{x \\to 0} \\left(\\frac{\\sin mx}{\\tan nx} \\cdot \\frac{x(x - 8)}{x(2x - 6)}\\right) = 2$$',
-      'Gunakan sifat $\\lim_{x \\to 0} \\frac{\\sin mx}{\\tan nx} = \\frac{m}{n}$ dan substitusikan $x = 0$ pada $\\frac{x - 8}{2x - 6}$:',
-      '$$\\frac{m}{n} \\cdot \\frac{0 - 8}{0 - 6} = 2 \\implies \\frac{m}{n} \\cdot \\frac{4}{3} = 2 \\implies \\frac{m}{n} = \\frac{3}{2}$$',
-      'Pasangan $(m, n)$ yang memiliki rasio $\\frac{m}{n} = \\frac{3}{2}$ adalah $(3, 2)$, $(6, 4)$, dan $(9, 6)$.',
+      'Gunakan sifat limit perkalian dua fungsi: $\\lim [f(x) \\cdot g(x)] = [\\lim f(x)] \\cdot [\\lim g(x)]$.',
+      'Hitung limit bagian aljabar:',
+      '$$\\lim_{x \\to 0} \\frac{x^2 - 8x}{2x^2 - 6x} = \\lim_{x \\to 0} \\frac{x(x - 8)}{x(2x - 6)} = \\frac{-8}{-6} = \\frac{4}{3}$$',
+      'Hitung limit bagian trigonometri:',
+      '$$\\lim_{x \\to 0} \\frac{\\sin mx}{\\tan nx} = \\frac{m}{n}$$',
+      'Substitusikan ke persamaan limit awal:',
+      '$$\\frac{m}{n} \\cdot \\frac{4}{3} = 2 \\implies \\frac{m}{n} = 2 \\cdot \\frac{3}{4} = \\frac{3}{2}$$',
+      'Rasio nilai parameter harus memenuhi perbandingan $m : n = 3 : 2$:',
+      '• Opsi A: $m = 3, n = 2 \\implies \\frac{3}{2}$ (**Benar**)',
+      '• Opsi B: $m = 2, n = 3 \\implies \\frac{2}{3} \\ne \\frac{3}{2}$ (Salah)',
+      '• Opsi C: $m = 4, n = 6 \\implies \\frac{4}{6} = \\frac{2}{3} \\ne \\frac{3}{2}$ (Salah)',
+      '• Opsi D: $m = 6, n = 4 \\implies \\frac{6}{4} = \\frac{3}{2}$ (**Benar**)',
+      '• Opsi E: $m = 9, n = 6 \\implies \\frac{9}{6} = \\frac{3}{2}$ (**Benar**)',
     ],
   },
 
   // =========================================================================
-  // 19. Fungsi Trigonometri — Model Suhu Kota f(t) (PGK)
+  // 16. Trigonometri — Model Suhu Harian
   // =========================================================================
   {
-    id: 'siaga2-q19',
-    number: 19,
+    id: 'siaga2-q16',
+    number: 16,
     packageId: 'siaga-2',
     topic: 'Trigonometri',
     subtopic: 'Nilai Maksimum dan Minimum Fungsi Sinus',
     type: 'multiple',
     stimulus:
-      'Suhu udara di suatu kota dimodelkan dengan fungsi $f(t) = 6\\sin(15^\\circ(t - 8)) + 26$, dengan $f(t)$ menyatakan suhu dalam $^\\circ\\text{C}$ dan $t$ menyatakan waktu dalam jam setelah pukul $00.00$ ($0 \\le t \\le 24$).',
+      'Perubahan suhu harian ($f$) dalam derajat celcius di suatu kota terhadap waktu ($t$ dalam jam) dinyatakan dalam persamaan:\n$$f(t) = 6\\sin 15^\\circ(t - 8) + 26$$\nPengamatan tersebut dimulai pukul $00.00$ ($t = 0$) hingga $t = 24$.',
     questionText:
-      'Pilihlah pernyataan yang benar berdasarkan model fungsi suhu tersebut! (Jawaban benar lebih dari satu)',
+      'Pilih pernyataan berikut yang benar berdasarkan informasi tersebut! (Jawaban benar lebih dari satu)',
     options: [
-      { id: 'A', text: 'Suhu tertinggi di kota tersebut terjadi pada pukul $12.00$.' },
-      { id: 'B', text: 'Suhu terendah di kota tersebut adalah $20\\,^\\circ\\text{C}$.' },
-      { id: 'C', text: 'Suhu tertinggi di kota tersebut adalah $32\\,^\\circ\\text{C}$ pada pukul $14.00$.' },
-      { id: 'D', text: 'Suhu terendah terjadi pada pukul $02.00$.' },
-      { id: 'E', text: 'Pada pukul $08.00$, suhu kota tersebut adalah $20\\,^\\circ\\text{C}$.' },
+      { id: 'A', text: 'Suhu tertinggi di kota tersebut pada saat waktu menunjukkan pukul 12.00.' },
+      { id: 'B', text: 'Suhu tertinggi di kota tersebut pada saat waktu menunjukkan pukul 14.00.' },
+      { id: 'C', text: 'Suhu terendah di kota tersebut adalah $20^\\circ\\text{C}$.' },
+      { id: 'D', text: 'Suhu tertinggi di kota tersebut adalah $32^\\circ\\text{C}$.' },
+      { id: 'E', text: 'Suhu terendah terjadi pada pukul 02.00.' },
     ],
-    correctAnswer: ['B', 'C', 'D'],
+    correctAnswer: ['B', 'C', 'D', 'E'],
     solutionSteps: [
-      'Fungsi $f(t) = 6\\sin(15^\\circ(t - 8)) + 26$ memiliki amplitudo $A = 6$ dan garis tengah $D = 26$.',
-      '• Suhu tertinggi: $f_{\\text{maks}} = 26 + 6 = 32\\,^\\circ\\text{C}$, tercapai saat $\\sin(15^\\circ(t - 8)) = 1 \\implies 15^\\circ(t - 8) = 90^\\circ \\implies t - 8 = 6 \\implies t = 14$ (pukul $14.00$, sehingga C benar dan A salah).',
-      '• Suhu terendah: $f_{\\text{min}} = 26 - 6 = 20\\,^\\circ\\text{C}$ (B benar), tercapai saat $\\sin(15^\\circ(t - 8)) = -1 \\implies 15^\\circ(t - 8) = -90^\\circ \\implies t - 8 = -6 \\implies t = 2$ (pukul $02.00$, sehingga D benar).',
-      '• Pada pukul $08.00$ ($t = 8$): $f(8) = 6\\sin(0^\\circ) + 26 = 26\\,^\\circ\\text{C}$ (E salah).',
+      'Fungsi suhu sinusoidal: $f(t) = 6\\sin(15^\\circ(t - 8)) + 26$. Nilai fungsi sinus berkisar $-1 \\le \\sin \\theta \\le 1$.',
+      'Hitung suhu ekstrem:',
+      '• Suhu maksimum: $f_{\\max} = 6(1) + 26 = 32^\\circ\\text{C}$ (Opsi D Benar)',
+      '• Suhu minimum: $f_{\\min} = 6(-1) + 26 = 20^\\circ\\text{C}$ (Opsi C Benar)',
+      'Tentukan waktu terjadinya suhu tertinggi saat $\\sin(15^\\circ(t - 8)) = 1$:',
+      '$$15^\\circ(t - 8) = 90^\\circ \\implies t - 8 = 6 \\implies t = 14\\text{ (pukul 14.00)}$$',
+      'Sehingga suhu tertinggi terjadi pada pukul 14.00 (Opsi B Benar, Opsi A Salah).',
+      'Tentukan waktu terjadinya suhu terendah saat $\\sin(15^\\circ(t - 8)) = -1$:',
+      '$$15^\\circ(t - 8) = -90^\\circ \\implies t - 8 = -6 \\implies t = 2\\text{ (pukul 02.00)}$$',
+      'Sehingga suhu terendah terjadi pada pukul 02.00 (Opsi E Benar).',
     ],
   },
 
   // =========================================================================
-  // 20. Vektor & Jarak — 5 Kota Segaris E-D-C-B-A (PGK Waktu < 250 Menit)
+  // 17. Vektor & Geometri — Segmen Jalur Lima Kota
   // =========================================================================
   {
-    id: 'siaga2-q20',
-    number: 20,
+    id: 'siaga2-q17',
+    number: 17,
     packageId: 'siaga-2',
-    topic: 'Vektor & Geometri',
-    subtopic: 'Jarak Euclidean & Perbandingan Segmen Garis',
+    topic: 'Vektor & Kinematika',
+    subtopic: 'Segmen Garis Jalur Lima Kota',
     type: 'multiple',
     svgType: 'collinear_cities',
     stimulus:
-      'Lima kota $E, D, C, B, A$ terletak pada satu jalur lurus dengan koordinat $A(230, 240)$ dan $E(-70, -160)$ (dalam km). Waktu tempuh normal antar kota adalah: $A \\to B$ selama $3\\text{ jam}$, $B \\to C$ selama $2\\text{ jam}$, $C \\to D$ selama $4\\text{ jam}$, dan $D \\to E$ selama $1\\text{ jam}$ (kecepatan konstan).',
+      'Sebuah jalur perjalanan menghubungkan lima kota berdekatan dalam satu lintasan garis lurus. Letak Kota A pada koordinat $(230, 240)$, sedangkan letak Kota E pada koordinat $(-70, -160)$. Denah urutan kota pada jalur lurus adalah $E - D - C - B - A$.\n\n' +
+      'Seorang pelancong melakukan perjalanan dengan kecepatan rata-rata yang sama dari setiap perjalanan:\n' +
+      '• Dari Kota A ke B dalam waktu $3\\text{ jam}$.\n' +
+      '• Dari Kota B ke C dalam waktu $2\\text{ jam}$.\n' +
+      '• Dari Kota C ke D dalam waktu $4\\text{ jam}$.\n' +
+      '• Dari Kota D ke E dalam waktu $1\\text{ jam}$.',
     questionText:
-      'Jika seseorang berkendara dengan kecepatan rata-rata baru sebesar $75\\text{ km/jam}$, perjalanan manakah yang memerlukan waktu tempuh kurang dari $250\\text{ menit}$? (Jawaban benar lebih dari satu)',
+      'Jika pelancong tersebut melakukan perjalanan dengan kecepatan rata-rata $75\\text{ km/jam}$, rute perjalanan mana yang waktu tempuhnya kurang dari $250\\text{ menit}$? (Jawaban benar lebih dari satu)',
     options: [
-      { id: 'A', text: 'Perjalanan dari kota $A$ ke kota $C$.' },
-      { id: 'B', text: 'Perjalanan dari kota $B$ ke kota $D$.' },
-      { id: 'C', text: 'Perjalanan dari kota $C$ ke kota $E$.' },
-      { id: 'D', text: 'Perjalanan dari kota $A$ ke kota $D$.' },
-      { id: 'E', text: 'Perjalanan dari kota $B$ ke kota $E$.' },
+      { id: 'A', text: 'Perjalanan dari Kota A ke B.' },
+      { id: 'B', text: 'Perjalanan dari Kota A ke C.' },
+      { id: 'C', text: 'Perjalanan dari Kota B ke D.' },
+      { id: 'D', text: 'Perjalanan dari Kota C ke E.' },
+      { id: 'E', text: 'Perjalanan dari Kota A ke D.' },
     ],
-    correctAnswer: ['A', 'B', 'C'],
+    correctAnswer: ['A', 'B', 'C', 'D'],
     solutionSteps: [
-      'Hitung jarak total dari kota $A(230, 240)$ ke kota $E(-70, -160)$:',
-      '$$|AE| = \\sqrt{(230 - (-70))^2 + (240 - (-160))^2} = \\sqrt{300^2 + 400^2} = 500\\text{ km}$$',
-      'Total waktu normal adalah $3 + 2 + 4 + 1 = 10\\text{ jam}$, sehingga $1\\text{ jam}$ perjalanan normal setara dengan $\\frac{500}{10} = 50\\text{ km}$:',
-      '• $|AB| = 150\\text{ km}, \\quad |BC| = 100\\text{ km}, \\quad |CD| = 200\\text{ km}, \\quad |DE| = 50\\text{ km}$.',
-      'Pada kecepatan $75\\text{ km/jam}$ ($1,25\\text{ km/menit}$), waktu $250\\text{ menit}$ menempuh jarak $250 \\times 1,25 = 312,5\\text{ km}$:',
-      '• $A \\to C$: $250\\text{ km} \\implies t = 200\\text{ menit} < 250\\text{ menit}$ (Benar).',
-      '• $B \\to D$: $300\\text{ km} \\implies t = 240\\text{ menit} < 250\\text{ menit}$ (Benar).',
-      '• $C \\to E$: $250\\text{ km} \\implies t = 200\\text{ menit} < 250\\text{ menit}$ (Benar).',
-      '• $A \\to D$ ($450\\text{ km}$) dan $B \\to E$ ($350\\text{ km}$) lebih dari $312,5\\text{ km}$ (Salah).',
+      'Hitung jarak total dari Kota A ke Kota E:',
+      '$$|\\vec{AE}| = \\sqrt{(-70 - 230)^2 + (-160 - 240)^2} = \\sqrt{(-300)^2 + (-400)^2} = 500\\text{ km}$$',
+      'Total waktu tempuh semula $= 3 + 2 + 4 + 1 = 10\\text{ jam}$.',
+      'Rasio jarak ruas jalan sama dengan rasio waktu tempuh:',
+      '• Jarak $AB = \\frac{3}{10} \\times 500 = 150\\text{ km}$',
+      '• Jarak $BC = \\frac{2}{10} \\times 500 = 100\\text{ km}$',
+      '• Jarak $CD = \\frac{4}{10} \\times 500 = 200\\text{ km}$',
+      '• Jarak $DE = \\frac{1}{10} \\times 500 = 50\\text{ km}$',
+      'Batas waktu tempuh: $250\\text{ menit} = \\frac{250}{60}\\text{ jam} = \\frac{25}{6}\\text{ jam}$.',
+      'Jarak tempuh maksimum dengan kecepatan $75\\text{ km/jam}$:',
+      '$$s_{\\max} = 75 \\times \\frac{25}{6} = 312{,}5\\text{ km}$$',
+      'Evaluasi tiap rute perjalanan:',
+      '• Rute A ke B: $s = 150\\text{ km} < 312{,}5\\text{ km}$ ($t = 120\\text{ menit}$) $\\implies$ **Benar**.',
+      '• Rute A ke C: $s = 150 + 100 = 250\\text{ km} < 312{,}5\\text{ km}$ ($t = 200\\text{ menit}$) $\\implies$ **Benar**.',
+      '• Rute B ke D: $s = 100 + 200 = 300\\text{ km} < 312{,}5\\text{ km}$ ($t = 240\\text{ menit}$) $\\implies$ **Benar**.',
+      '• Rute C ke E: $s = 200 + 50 = 250\\text{ km} < 312{,}5\\text{ km}$ ($t = 200\\text{ menit}$) $\\implies$ **Benar**.',
+      '• Rute A ke D: $s = 150 + 100 + 200 = 450\\text{ km} > 312{,}5\\text{ km}$ ($t = 360\\text{ menit}$) $\\implies$ Salah.',
     ],
   },
 
   // =========================================================================
-  // 21. Vektor — Koordinat Kota C pada Jalur Lurus A-E
+  // 18. Transformasi Geometri — Koin Karambol
   // =========================================================================
   {
-    id: 'siaga2-q21',
-    number: 21,
-    packageId: 'siaga-2',
-    topic: 'Vektor',
-    subtopic: 'Rumus Perbandingan Koordinat Titik pada Ruas Garis',
-    type: 'single',
-    svgType: 'collinear_cities',
-    stimulus:
-      'Mengacu pada jalur lurus lima kota $A(230, 240)$ hingga $E(-70, -160)$, rasio jarak antar kota sebanding dengan waktu tempuhnya, yaitu $AB : BC : CD : DE = 3 : 2 : 4 : 1$.',
-    questionText:
-      'Koordinat posisi kota $C$ pada bidang Kartesius tersebut adalah ....',
-    options: [
-      { id: 'A', text: '$(80, 40)$' },
-      { id: 'B', text: '$(140, 120)$' },
-      { id: 'C', text: '$(-40, -120)$' },
-      { id: 'D', text: '$(50, 20)$' },
-      { id: 'E', text: '$(110, 80)$' },
-    ],
-    correctAnswer: 'A',
-    solutionSteps: [
-      'Dari perbandingan $AB : BC : CD : DE = 3 : 2 : 4 : 1$, jarak $AC = 3 + 2 = 5$ bagian dan jarak $CE = 4 + 1 = 5$ bagian.',
-      'Artinya, kota $C$ berada tepat di titik tengah ruas garis $AE$ ($AC : CE = 1 : 1$).',
-      'Gunakan rumus titik tengah antara $A(230, 240)$ dan $E(-70, -160)$:',
-      '$$C = \\left(\\frac{230 + (-70)}{2}, \\frac{240 + (-160)}{2}\\right) = \\left(\\frac{160}{2}, \\frac{80}{2}\\right) = (80, 40)$$',
-    ],
-  },
-
-  // =========================================================================
-  // 22. Transformasi Geometri — Jenis Transformasi Koin Karambol
-  // =========================================================================
-  {
-    id: 'siaga2-q22',
-    number: 22,
+    id: 'siaga2-q18',
+    number: 18,
     packageId: 'siaga-2',
     topic: 'Transformasi Geometri',
-    subtopic: 'Konsep Dasar Transformasi Geometri',
+    subtopic: 'Jenis Transformasi Geometri',
     type: 'single',
     svgType: 'carrom_board',
     stimulus:
-      'Perhatikan gambar papan karambol yang dilengkapi sumbu koordinat Kartesius dengan titik pusat papan sebagai titik asal $O(0, 0)$. Sebuah koin karambol disentil dari posisi "awal" hingga meluncur lurus masuk ke lubang pojok kiri atas pada posisi "akhir".',
+      'Perhatikan gambar papan karambol yang dilengkapi sumbu koordinat Kartesius dengan pusat di titik $O(0, 0)$. Sebuah koin karambol meluncur lurus dari posisi awal di kuadran I menuju posisi akhir di lubang sudut kuadran II.',
     questionText:
-      'Transformasi geometri yang memindahkan koin karambol dari posisi awal ke posisi akhir adalah ....',
+      'Transformasi geometri apakah yang memindahkan koin karambol dari posisi awal ke posisi akhir tersebut?',
     options: [
       { id: 'A', text: 'Rotasi dengan titik pusat $(0, 0)$' },
       { id: 'B', text: 'Dilatasi dengan titik pusat $(0, 0)$' },
@@ -758,333 +695,239 @@ export const questionsData: Question[] = [
     ],
     correctAnswer: 'C',
     solutionSteps: [
-      'Perhatikan lintasan koin karambol pada gambar: koin bergerak sepanjang garis lurus dari titik awal menuju titik akhir tanpa mengubah ukuran koin.',
-      'Perpindahan (pergeseran) suatu objek dari satu titik $(x, y)$ ke titik lain $(x + a, y + b)$ sepanjang vektor arah tertentu dinamakan Translasi (pergeseran).',
+      'Perhatikan pergerakan koin karambol pada bidang koordinat papan karambol:',
+      '• Koin bergerak sepanjang lintasan garis lurus berarah dari posisi awal menuju posisi akhir.',
+      '• Orientasi posisi koin tidak mengalami perputaran sudut terhadap pusat acuan (bukan rotasi).',
+      '• Ukuran dan skala koin tetap sama tanpa mengalami pembesaran atau pengecilan (bukan dilatasi).',
+      '• Posisi akhir bukan bayangan cermin terhadap sumbu koordinat (bukan refleksi).',
+      'Pergeseran setiap titik pada objek dengan arah dan jarak tertentu merupakan definisi dari transformasi **Translasi (pergeseran)**.',
     ],
   },
 
   // =========================================================================
-  // 23. Transformasi Geometri — Vektor Translasi Koin Karambol
+  // 19. Geometri Analitik — Titik Singgung Lingkaran dari Titik (7, 1)
   // =========================================================================
   {
-    id: 'siaga2-q23',
-    number: 23,
-    packageId: 'siaga-2',
-    topic: 'Transformasi Geometri',
-    subtopic: 'Vektor Translasi pada Bidang Kartesius',
-    type: 'single',
-    svgType: 'carrom_board',
-    stimulus:
-      'Pada papan karambol dengan pusat $O(0, 0)$, posisi awal koin berada di titik $P(1, 1)$ (dalam satuan dm) dan posisi akhir lubang pojok kiri atas berada di titik $P\'(-4, 4)$.',
-    questionText:
-      'Vektor translasi $\\vec{T} = \\begin{pmatrix} a \\\\ b \\end{pmatrix}$ serta jarak tempuh koin karambol tersebut adalah ....',
-    options: [
-      { id: 'A', text: '$\\vec{T} = \\begin{pmatrix} -5 \\\\ 3 \\end{pmatrix} \\text{ dan jarak } \\sqrt{34}\\text{ dm}$' },
-      { id: 'B', text: '$\\vec{T} = \\begin{pmatrix} 5 \\\\ -3 \\end{pmatrix} \\text{ dan jarak } \\sqrt{34}\\text{ dm}$' },
-      { id: 'C', text: '$\\vec{T} = \\begin{pmatrix} -3 \\\\ 5 \\end{pmatrix} \\text{ dan jarak } \\sqrt{34}\\text{ dm}$' },
-      { id: 'D', text: '$\\vec{T} = \\begin{pmatrix} -5 \\\\ 5 \\end{pmatrix} \\text{ dan jarak } 5\\sqrt{2}\\text{ dm}$' },
-      { id: 'E', text: '$\\vec{T} = \\begin{pmatrix} -4 \\\\ 4 \\end{pmatrix} \\text{ dan jarak } 4\\sqrt{2}\\text{ dm}$' },
-    ],
-    correctAnswer: 'A',
-    solutionSteps: [
-      'Vektor translasi diperoleh dari selisih koordinat akhir dan koordinat awal:',
-      '$$\\vec{T} = P\' - P = \\begin{pmatrix} -4 - 1 \\\\ 4 - 1 \\end{pmatrix} = \\begin{pmatrix} -5 \\\\ 3 \\end{pmatrix}$$',
-      'Jarak tempuh koin adalah panjang vektor translasi $|\\vec{T}|$:',
-      '$$|\\vec{T}| = \\sqrt{(-5)^2 + 3^2} = \\sqrt{25 + 9} = \\sqrt{34}\\text{ dm}$$',
-    ],
-  },
-
-  // =========================================================================
-  // 24. Lingkaran — Koordinat Titik Singgung dari Titik (7, 1) (PGK)
-  // =========================================================================
-  {
-    id: 'siaga2-q24',
-    number: 24,
+    id: 'siaga2-q19',
+    number: 19,
     packageId: 'siaga-2',
     topic: 'Geometri Analitik',
-    subtopic: 'Garis Singgung Lingkaran dari Titik di Luar Lingkaran',
+    subtopic: 'Titik Singgung Lingkaran dari Titik di Luar Lingkaran',
     type: 'multiple',
     svgType: 'circle_tangent',
     stimulus:
-      'Sebuah lingkaran berpusat di $O(0, 0)$ memiliki jari-jari $r = 5$ seperti pada gambar. Dari titik $P(7, 1)$ di luar lingkaran, ditarik dua garis singgung yang menyinggung lingkaran di titik $A$ dan $B$.',
+      'Sebuah lingkaran berpusat di $O(0, 0)$ memiliki jari-jari $r = 5$, sehingga memiliki persamaan $x^2 + y^2 = 25$. Dari titik $P(7, 1)$ di luar lingkaran ditarik dua garis singgung ke lingkaran.',
     questionText:
-      'Manakah di antara titik berikut yang merupakan titik singgung garis tersebut pada lingkaran? (Jawaban benar lebih dari satu)',
+      'Titik manakah pada lingkaran yang menjadi titik singgung garis yang ditarik dari titik $(7, 1)$? (Jawaban benar lebih dari satu)',
     options: [
-      { id: 'A', text: 'titik $(3, 4)$.' },
-      { id: 'B', text: 'titik $(3, -4)$.' },
-      { id: 'C', text: 'titik $(4, 3)$.' },
-      { id: 'D', text: 'titik $(4, -3)$.' },
-      { id: 'E', text: 'titik $(-3, 4)$.' },
+      { id: 'A', text: 'titik $(3, 4)$' },
+      { id: 'B', text: 'titik $(3, -4)$' },
+      { id: 'C', text: 'titik $(4, 3)$' },
+      { id: 'D', text: 'titik $(4, -3)$' },
+      { id: 'E', text: 'titik $(-3, 4)$' },
     ],
     correctAnswer: ['A', 'D'],
     solutionSteps: [
-      'Persamaan lingkaran adalah $x^2 + y^2 = 25$. Misalkan titik singgungnya adalah $(x_1, y_1)$, maka persamaan garis singgungnya $x_1 x + y_1 y = 25$.',
-      'Karena garis singgung melalui titik $P(7, 1)$, maka:',
-      '$$7x_1 + y_1 = 25 \\implies y_1 = 25 - 7x_1$$',
-      'Substitusikan ke dalam persamaan lingkaran $x_1^2 + y_1^2 = 25$:',
-      '$$x_1^2 + (25 - 7x_1)^2 = 25 \\implies 50x_1^2 - 350x_1 + 600 = 0$$',
-      'Bagi kedua ruas dengan $50$: $x_1^2 - 7x_1 + 12 = 0 \\implies (x_1 - 3)(x_1 - 4) = 0$.',
-      '• Untuk $x_1 = 3 \\implies y_1 = 25 - 21 = 4 \\implies$ titik $(3, 4)$.',
-      '• Untuk $x_1 = 4 \\implies y_1 = 25 - 28 = -3 \\implies$ titik $(4, -3)$.',
+      'Tentukan persamaan garis polar (garis kutub) dari titik $P(x_1, y_1) = (7, 1)$ terhadap lingkaran $x^2 + y^2 = 25$:',
+      '$$x_1 x + y_1 y = r^2 \\implies 7x + 1y = 25 \\implies y = 25 - 7x$$',
+      'Substitusikan persamaan garis polar $y = 25 - 7x$ ke dalam persamaan lingkaran:',
+      '$$x^2 + (25 - 7x)^2 = 25$$',
+      '$$x^2 + (625 - 350x + 49x^2) = 25$$',
+      '$$50x^2 - 350x + 600 = 0$$',
+      'Sederhanakan dengan membagi $50$ pada kedua ruas:',
+      '$$x^2 - 7x + 12 = 0 \\implies (x - 3)(x - 4) = 0$$',
+      'Diperoleh dua absis titik singgung: $x = 3$ atau $x = 4$.',
+      '• Untuk $x = 3$: $y = 25 - 7(3) = 25 - 21 = 4 \\implies$ titik $(3, 4)$.',
+      '• Untuk $x = 4$: $y = 25 - 7(4) = 25 - 28 = -3 \\implies$ titik $(4, -3)$.',
+      'Jadi titik-titik singgung lingkaran adalah $(3, 4)$ (Opsi A) dan $(4, -3)$ (Opsi D).',
     ],
   },
 
   // =========================================================================
-  // 25. Lingkaran — Persamaan Kedua Garis Singgung dari Titik (7, 1)
+  // 20. Matriks — Kantin Sekolah: Matriks Senin, Selasa, Kamis
   // =========================================================================
   {
-    id: 'siaga2-q25',
-    number: 25,
-    packageId: 'siaga-2',
-    topic: 'Geometri Analitik',
-    subtopic: 'Persamaan Garis Singgung Lingkaran',
-    type: 'single',
-    svgType: 'circle_tangent',
-    stimulus:
-      'Mengacu pada lingkaran $x^2 + y^2 = 25$ dan kedua garis singgung yang ditarik dari titik $P(7, 1)$ di luar lingkaran.',
-    questionText:
-      'Persamaan kedua garis singgung lingkaran tersebut adalah ....',
-    options: [
-      { id: 'A', text: '$3x + 4y = 25 \\text{ dan } 4x - 3y = 25$' },
-      { id: 'B', text: '$3x - 4y = 25 \\text{ dan } 4x + 3y = 25$' },
-      { id: 'C', text: '$3x + 4y = 25 \\text{ dan } 4x + 3y = 25$' },
-      { id: 'D', text: '$4x + 3y = 25 \\text{ dan } 3x - 4y = 25$' },
-      { id: 'E', text: '$3x - 4y = 25 \\text{ dan } 4x - 3y = 25$' },
-    ],
-    correctAnswer: 'A',
-    solutionSteps: [
-      'Rumus garis singgung lingkaran $x^2 + y^2 = r^2$ di titik singgung $(x_1, y_1)$ adalah $x_1 x + y_1 y = r^2$.',
-      'Dari titik singgung pertama $A(3, 4)$ diperoleh garis singgung: $3x + 4y = 25$.',
-      'Dari titik singgung kedua $B(4, -3)$ diperoleh garis singgung: $4x - 3y = 25$.',
-    ],
-  },
-
-  // =========================================================================
-  // 26. Matriks — Persamaan Matriks Kantin (Senin, Selasa, Kamis)
-  // =========================================================================
-  {
-    id: 'siaga2-q26',
-    number: 26,
+    id: 'siaga2-q20',
+    number: 20,
     packageId: 'siaga-2',
     topic: 'Matriks',
     subtopic: 'Representasi Matriks dari Tabel Data',
     type: 'single',
     stimulus:
-      'Sebuah kantin sekolah menjual makanan dan minuman selama 5 hari: Senin ($10$ makanan, $15$ minuman, pendapatan $225$ ribu), Selasa ($12$ makanan, $10$ minuman, pendapatan $230$ ribu), Rabu ($8$ makanan, $12$ minuman, pendapatan $180$ ribu), Kamis ($15$ makanan, $20$ minuman, pendapatan $325$ ribu), dan Jumat ($3$ makanan, $4$ minuman, pendapatan $65$ ribu).',
+      'Sebuah kantin sekolah menjual makanan dan minuman dengan penjualan selama 5 hari disajikan dalam tabel berikut:\n\n' +
+      '| Hari Penjualan | Jumlah Makanan | Jumlah Minuman | Pendapatan (ribu rupiah) |\n' +
+      '| :--- | :---: | :---: | :---: |\n' +
+      '| Senin | $10$ | $15$ | $225$ |\n' +
+      '| Selasa | $10$ | $12$ | $230$ |\n' +
+      '| Rabu | $12$ | $8$ | $180$ |\n' +
+      '| Kamis | $20$ | $15$ | $325$ |\n' +
+      '| Jumat | $15$ | $4$ | $65$ |',
     questionText:
       'Jika $x$ menyatakan harga satu porsi makanan dan $y$ menyatakan harga satu porsi minuman (dalam ribuan rupiah), matriks yang menyajikan pendapatan kantin pada hari Senin, Selasa, dan Kamis adalah ....',
     options: [
       {
         id: 'A',
-        text: '$\\begin{pmatrix} 10 & 12 & 15 \\\\ 15 & 10 & 20 \\end{pmatrix}\\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 225 \\\\ 230 \\\\ 325 \\end{pmatrix}$',
+        text: '$\\begin{pmatrix} 10 & 15 \\\\ 10 & 12 \\\\ 20 & 15 \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 225 \\\\ 230 \\\\ 325 \\end{pmatrix}$',
       },
       {
         id: 'B',
-        text: '$\\begin{pmatrix} 10 & 15 \\\\ 12 & 10 \\\\ 15 & 20 \\end{pmatrix}\\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 225 \\\\ 230 \\\\ 325 \\end{pmatrix}$',
+        text: '$\\begin{pmatrix} 15 & 10 \\\\ 12 & 10 \\\\ 15 & 20 \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 225 \\\\ 230 \\\\ 325 \\end{pmatrix}$',
       },
       {
         id: 'C',
-        text: '$\\begin{pmatrix} 10 & 15 \\\\ 12 & 10 \\\\ 8 & 12 \\end{pmatrix}\\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 225 \\\\ 230 \\\\ 180 \\end{pmatrix}$',
+        text: '$\\begin{pmatrix} 10 & 10 & 20 \\\\ 15 & 12 & 15 \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 225 \\\\ 230 \\\\ 325 \\end{pmatrix}$',
       },
       {
         id: 'D',
-        text: '$\\begin{pmatrix} 15 & 10 \\\\ 10 & 12 \\\\ 20 & 15 \\end{pmatrix}\\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 225 \\\\ 230 \\\\ 325 \\end{pmatrix}$',
+        text: '$\\begin{pmatrix} 10 & 15 \\\\ 12 & 8 \\\\ 20 & 15 \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 225 \\\\ 180 \\\\ 325 \\end{pmatrix}$',
       },
       {
         id: 'E',
-        text: '$\\begin{pmatrix} 10 & 15 \\\\ 12 & 10 \\\\ 15 & 20 \\end{pmatrix}\\begin{pmatrix} y \\\\ x \\end{pmatrix} = \\begin{pmatrix} 225 \\\\ 230 \\\\ 325 \\end{pmatrix}$',
+        text: '$\\begin{pmatrix} 20 & 15 \\\\ 10 & 12 \\\\ 10 & 15 \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 325 \\\\ 230 \\\\ 225 \\end{pmatrix}$',
       },
-    ],
-    correctAnswer: 'B',
-    solutionSteps: [
-      'Susun persamaan pendapatan untuk hari Senin, Selasa, dan Kamis:',
-      '• Senin: $10x + 15y = 225$',
-      '• Selasa: $12x + 10y = 230$',
-      '• Kamis: $15x + 20y = 325$',
-      'Dalam bentuk perkalian matriks (ordo $3 \\times 2$ dikali $2 \\times 1$ menghasilkan $3 \\times 1$):',
-      '$$\\begin{pmatrix} 10 & 15 \\\\ 12 & 10 \\\\ 15 & 20 \\end{pmatrix}\\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 225 \\\\ 230 \\\\ 325 \\end{pmatrix}$$',
-    ],
-  },
-
-  // =========================================================================
-  // 27. Matriks — Harga Satuan Makanan dan Minuman Kantin Sekolah
-  // =========================================================================
-  {
-    id: 'siaga2-q27',
-    number: 27,
-    packageId: 'siaga-2',
-    topic: 'Matriks',
-    subtopic: 'Solusi SPLDV dari Tabel Penjualan',
-    type: 'single',
-    stimulus:
-      'Mengacu pada tabel penjualan kantin sekolah: hari Senin terjual $10$ makanan dan $15$ minuman dengan pendapatan $\\text{Rp}225.000,00$; hari Selasa terjual $12$ makanan dan $10$ minuman dengan pendapatan $\\text{Rp}230.000,00$.',
-    questionText:
-      'Harga satu porsi makanan ($x$) dan satu porsi minuman ($y$) di kantin tersebut berturut-turut adalah ....',
-    options: [
-      { id: 'A', text: '$\\text{Rp}15.000,00 \\text{ dan } \\text{Rp}5.000,00$' },
-      { id: 'B', text: '$\\text{Rp}5.000,00 \\text{ dan } \\text{Rp}15.000,00$' },
-      { id: 'C', text: '$\\text{Rp}12.000,00 \\text{ dan } \\text{Rp}7.000,00$' },
-      { id: 'D', text: '$\\text{Rp}10.000,00 \\text{ dan } \\text{Rp}8.000,00$' },
-      { id: 'E', text: '$\\text{Rp}14.000,00 \\text{ dan } \\text{Rp}6.000,00$' },
     ],
     correctAnswer: 'A',
     solutionSteps: [
-      'Sederhanakan sistem persamaan hari Senin dan Selasa (dalam ribuan rupiah):',
-      '• Senin: $10x + 15y = 225 \\implies 2x + 3y = 45$',
-      '• Selasa: $12x + 10y = 230 \\implies 6x + 5y = 115$',
-      'Kalikan persamaan pertama dengan $3$ menjadi $6x + 9y = 135$, lalu kurangkan dengan persamaan kedua:',
-      '$$4y = 20 \\implies y = 5 \\text{ (ribu rupiah)}$$',
-      'Substitusikan $y = 5$: $2x + 3(5) = 45 \\implies 2x = 30 \\implies x = 15$ (ribu rupiah).',
-      'Jadi, harga satu porsi makanan $\\text{Rp}15.000,00$ dan satu porsi minuman $\\text{Rp}5.000,00$.',
+      'Identifikasi banyak penjualan dan pendapatan pada 3 hari yang diminta:',
+      '• Hari Senin: $10\\text{ makanan} + 15\\text{ minuman} \\implies 10x + 15y = 225$',
+      '• Hari Selasa: $10\\text{ makanan} + 12\\text{ minuman} \\implies 10x + 12y = 230$',
+      '• Hari Kamis: $20\\text{ makanan} + 15\\text{ minuman} \\implies 20x + 15y = 325$',
+      'Susun persamaan linear ke dalam bentuk perkalian matriks $A \\cdot \\vec{x} = \\vec{b}$:',
+      '$$\\begin{pmatrix} 10 & 15 \\\\ 10 & 12 \\\\ 20 & 15 \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 225 \\\\ 230 \\\\ 325 \\end{pmatrix}$$',
     ],
   },
 
   // =========================================================================
-  // 28. Matriks — Pasangan Hari yang Dapat Menghitung Harga Satuan (PGK)
+  // 21. Matriks — Pasangan Hari untuk Menghitung Harga Satuan
   // =========================================================================
   {
-    id: 'siaga2-q28',
-    number: 28,
+    id: 'siaga2-q21',
+    number: 21,
     packageId: 'siaga-2',
     topic: 'Matriks',
     subtopic: 'Syarat Ketunggalan Solusi SPLDV (Determinan Tak Nol)',
     type: 'multiple',
     stimulus:
-      'Data penjualan kantin selama 5 hari: Senin ($10$ makanan, $15$ minuman), Selasa ($12$ makanan, $10$ minuman), Rabu ($8$ makanan, $12$ minuman), Kamis ($15$ makanan, $20$ minuman), dan Jumat ($3$ makanan, $4$ minuman).',
+      'Mengacu pada tabel data penjualan makanan dan minuman kantin selama 5 hari (Senin s.d. Jumat):\n' +
+      'Senin: $(10, 15)$, Selasa: $(10, 12)$, Rabu: $(12, 8)$, Kamis: $(20, 15)$, Jumat: $(15, 4)$.',
     questionText:
-      'Berdasarkan tabel tersebut, pasangan hari manakah yang dapat digunakan untuk menghitung harga satuan makanan dan minuman secara tunggal? (Jawaban benar lebih dari satu)',
+      'Berdasarkan tabel tersebut, pasangan hari mana yang dapat digunakan untuk menghitung harga satuan makanan dan minuman? (Jawaban benar lebih dari satu)',
     options: [
       { id: 'A', text: 'Senin dan Selasa' },
       { id: 'B', text: 'Selasa dan Rabu' },
       { id: 'C', text: 'Senin dan Rabu' },
       { id: 'D', text: 'Kamis dan Jumat' },
-      { id: 'E', text: 'Rabu dan Jumat' },
+      { id: 'E', text: 'Dua hari dengan koefisien yang saling kelipatan (sebanding)' },
     ],
-    correctAnswer: ['A', 'B', 'E'],
+    correctAnswer: ['A', 'B', 'C', 'D'],
     solutionSteps: [
-      'Pasangan dua hari dapat menentukan harga satuan secara tunggal jika determinan matriks koefisiennya tidak nol ($\\det \\neq 0$):',
-      '• Senin & Selasa: $\\det\\begin{pmatrix} 10 & 15 \\\\ 12 & 10 \\end{pmatrix} = 100 - 180 = -80 \\neq 0$ (Dapat digunakan / Benar).',
-      '• Selasa & Rabu: $\\det\\begin{pmatrix} 12 & 10 \\\\ 8 & 12 \\end{pmatrix} = 144 - 80 = 64 \\neq 0$ (Dapat digunakan / Benar).',
-      '• Senin & Rabu: $\\det\\begin{pmatrix} 10 & 15 \\\\ 8 & 12 \\end{pmatrix} = 120 - 120 = 0$ karena rasio keduanya $2 : 3$ (Tidak dapat digunakan / Salah).',
-      '• Kamis & Jumat: $\\det\\begin{pmatrix} 15 & 20 \\\\ 3 & 4 \\end{pmatrix} = 60 - 60 = 0$ karena rasio keduanya $3 : 4$ (Tidak dapat digunakan / Salah).',
-      '• Rabu & Jumat: $\\det\\begin{pmatrix} 8 & 12 \\\\ 3 & 4 \\end{pmatrix} = 32 - 36 = -4 \\neq 0$ (Dapat digunakan / Benar).',
+      'Syarat agar sistem dua persamaan linear memiliki solusi unik (tunggal) adalah determinan matriks koefisien tidak sama dengan nol ($\\det \\ne 0$), yang berarti perbandingan jumlah makanan dan minuman pada kedua hari tidak boleh sama.',
+      'Uji determinan tiap pasangan hari:',
+      '• Senin dan Selasa: $\\det = 10(12) - 15(10) = 120 - 150 = -30 \\ne 0 \\implies$ **Dapat digunakan**.',
+      '• Selasa dan Rabu: $\\det = 10(8) - 12(12) = 80 - 144 = -64 \\ne 0 \\implies$ **Dapat digunakan**.',
+      '• Senin dan Rabu: $\\det = 10(8) - 15(12) = 80 - 180 = -100 \\ne 0 \\implies$ **Dapat digunakan**.',
+      '• Kamis dan Jumat: $\\det = 20(4) - 15(15) = 80 - 225 = -145 \\ne 0 \\implies$ **Dapat digunakan**.',
+      'Karena keempat pasangan tersebut memiliki determinan tak nol, maka semuanya dapat digunakan untuk menentukan harga satuan.',
     ],
   },
 
   // =========================================================================
-  // 29. Matriks — Perkalian Matriks Pendapatan Senin sampai Jumat
+  // 22. Matriks — Penjumlahan Pendapatan Senin s.d. Jumat
   // =========================================================================
   {
-    id: 'siaga2-q29',
-    number: 29,
+    id: 'siaga2-q22',
+    number: 22,
     packageId: 'siaga-2',
     topic: 'Matriks',
-    subtopic: 'Perkalian Matriks Ordo 5x2 dengan 2x1',
+    subtopic: 'Perkalian Matriks Penjumlahan Pendapatan',
     type: 'single',
     stimulus:
-      'Dari tabel penjualan kantin selama 5 hari (Senin: $10, 15$; Selasa: $12, 10$; Rabu: $8, 12$; Kamis: $15, 20$; Jumat: $3, 4$), diketahui harga satu porsi makanan adalah $15$ ribu rupiah dan satu porsi minuman adalah $5$ ribu rupiah.',
+      'Diberikan matriks data penjualan kantin selama 5 hari (Senin s.d. Jumat):\n$$M = \\begin{pmatrix} 10 & 15 \\\\ 10 & 12 \\\\ 12 & 8 \\\\ 20 & 15 \\\\ 15 & 4 \\end{pmatrix}$$',
     questionText:
-      'Bentuk perkalian matriks yang menyatakan pendapatan harian dari penjualan makanan dan minuman dari hari Senin sampai Jumat adalah ....',
+      'Bentuk operasi perkalian matriks yang menyatakan penjumlahan total pendapatan dari penjualan makanan dan minuman dari hari Senin sampai Jumat adalah ....',
     options: [
       {
         id: 'A',
-        text: '$\\begin{pmatrix} 10 & 15 \\\\ 12 & 10 \\\\ 8 & 12 \\\\ 15 & 20 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 \\\\ 15 \\end{pmatrix}$',
+        text: '$\\begin{pmatrix} 1 & 1 & 1 & 1 & 1 \\end{pmatrix} \\begin{pmatrix} 10 & 15 \\\\ 10 & 12 \\\\ 12 & 8 \\\\ 20 & 15 \\\\ 15 & 4 \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\end{pmatrix}$',
       },
       {
         id: 'B',
-        text: '$\\begin{pmatrix} 10 & 15 \\\\ 12 & 10 \\\\ 8 & 12 \\\\ 15 & 20 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 15 \\\\ 5 \\end{pmatrix}$',
+        text: '$\\begin{pmatrix} 10 & 15 \\\\ 10 & 12 \\\\ 12 & 8 \\\\ 20 & 15 \\\\ 15 & 4 \\end{pmatrix} \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\\\ 1 \\\\ 1 \\end{pmatrix} \\begin{pmatrix} x & y \\end{pmatrix}$',
       },
       {
         id: 'C',
-        text: '$\\begin{pmatrix} 15 & 10 \\\\ 10 & 12 \\\\ 12 & 8 \\\\ 20 & 15 \\\\ 4 & 3 \\end{pmatrix}\\begin{pmatrix} 15 \\\\ 5 \\end{pmatrix}$',
+        text: '$\\begin{pmatrix} x & y \\end{pmatrix} \\begin{pmatrix} 10 & 15 \\\\ 10 & 12 \\\\ 12 & 8 \\\\ 20 & 15 \\\\ 15 & 4 \\end{pmatrix}$',
       },
       {
         id: 'D',
-        text: '$\\begin{pmatrix} 10 & 12 & 8 & 15 & 3 \\\\ 15 & 10 & 12 & 20 & 4 \\end{pmatrix}\\begin{pmatrix} 15 \\\\ 5 \\end{pmatrix}$',
+        text: '$\\begin{pmatrix} 1 & 1 \\end{pmatrix} \\begin{pmatrix} 10 & 10 & 12 & 20 & 15 \\\\ 15 & 12 & 8 & 15 & 4 \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\end{pmatrix}$',
       },
       {
         id: 'E',
-        text: '$\\begin{pmatrix} 15 & 5 \\end{pmatrix}\\begin{pmatrix} 10 & 15 \\\\ 12 & 10 \\\\ 8 & 12 \\\\ 15 & 20 \\\\ 3 & 4 \\end{pmatrix}$',
+        text: '$\\begin{pmatrix} 1 & 1 & 1 & 1 & 1 \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\end{pmatrix}$',
       },
-    ],
-    correctAnswer: 'B',
-    solutionSteps: [
-      'Matriks jumlah penjualan harian berukuran $5 \\times 2$ dengan kolom pertama untuk makanan dan kolom kedua untuk minuman.',
-      'Karena harga makanan $x = 15$ dan harga minuman $y = 5$, maka matriks kolom harganya adalah $\\begin{pmatrix} 15 \\\\ 5 \\end{pmatrix}$.',
-      'Hasil kali keduanya menghasilkan matriks pendapatan harian $\\begin{pmatrix} 225 \\\\ 230 \\\\ 180 \\\\ 325 \\\\ 65 \\end{pmatrix}$:',
-      '$$\\begin{pmatrix} 10 & 15 \\\\ 12 & 10 \\\\ 8 & 12 \\\\ 15 & 20 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 15 \\\\ 5 \\end{pmatrix}$$',
-    ],
-  },
-
-  // =========================================================================
-  // 30. Fungsi Eksponensial — Grafik Eliminasi Obat Antibiotik (PGK)
-  // =========================================================================
-  {
-    id: 'siaga2-q30',
-    number: 30,
-    packageId: 'siaga-2',
-    topic: 'Fungsi Eksponensial',
-    subtopic: 'Peluruhan Eksponensial (Eliminasi Obat)',
-    type: 'multiple',
-    svgType: 'antibiotic_decay',
-    stimulus:
-      'Perhatikan grafik eliminasi obat antibiotik dalam darah $C(t) = C_0 \\cdot e^{-kt}$ dengan konsentrasi awal $C(0) = 100\\text{ mg/L}$, $C(4) = 50\\text{ mg/L}$, $C(8) = 25\\text{ mg/L}$, $C(12) = 12,5\\text{ mg/L}$, dan $C(16) = 6,25\\text{ mg/L}$.',
-    questionText:
-      'Berdasarkan grafik, pada waktu $t$ manakah konsentrasi obat dalam darah berada pada rentang $20\\text{ mg/L}$ hingga $80\\text{ mg/L}$? (Jawaban benar lebih dari satu)',
-    options: [
-      { id: 'A', text: '$4\\text{ jam}$.' },
-      { id: 'B', text: '$5\\text{ jam}$.' },
-      { id: 'C', text: '$10\\text{ jam}$.' },
-      { id: 'D', text: '$15\\text{ jam}$.' },
-      { id: 'E', text: '$20\\text{ jam}$.' },
-    ],
-    correctAnswer: ['A', 'B'],
-    solutionSteps: [
-      'Dari grafik terlihat waktu paruh obat adalah $4\\text{ jam}$ sehingga $C(t) = 100 \\cdot \\left(\\frac{1}{2}\\right)^{t/4}$.',
-      'Periksa konsentrasi obat untuk masing-masing pilihan waktu:',
-      '• $t = 4\\text{ jam} \\implies C(4) = 50,0\\text{ mg/L}$ (berada dalam rentang $20 \\le C \\le 80$ / Benar).',
-      '• $t = 5\\text{ jam} \\implies C(5) = 100 \\cdot (0,5)^{1,25} \\approx 42,0\\text{ mg/L}$ (berada dalam rentang $20 \\le C \\le 80$ / Benar).',
-      '• $t = 10\\text{ jam}$: karena pada $t = 9,29\\text{ jam}$ konsentrasi sudah turun menjadi $20\\text{ mg/L}$, maka untuk $t = 10, 15, 20\\text{ jam}$ konsentrasi berada di bawah $20\\text{ mg/L}$ (Salah).',
-    ],
-  },
-
-  // =========================================================================
-  // 31. Fungsi Eksponensial — Batas Efektivitas Obat (MIC / KHM)
-  // =========================================================================
-  {
-    id: 'siaga2-q31',
-    number: 31,
-    packageId: 'siaga-2',
-    topic: 'Fungsi Eksponensial',
-    subtopic: 'Waktu Paruh & Konsentrasi Hambat Minimum (MIC)',
-    type: 'single',
-    svgType: 'antibiotic_decay',
-    stimulus:
-      'Pada grafik eliminasi antibiotik $C(t) = 100 \\cdot \\left(\\frac{1}{2}\\right)^{t/4}$, garis putus-putus hijau menunjukkan batas MIC / KHM (Konsentrasi Hambat Minimum) sebesar $12,5\\text{ mg/L}$.',
-    questionText:
-      'Waktu paruh obat ($T_{1/2}$) serta waktu maksimal obat masih efektif bekerja di atas ambang MIC ($12,5\\text{ mg/L}$) sebelum pasien harus meminum dosis berikutnya adalah ....',
-    options: [
-      { id: 'A', text: '$T_{1/2} = 4\\text{ jam} \\text{ dan waktu efektif } 12\\text{ jam}$' },
-      { id: 'B', text: '$T_{1/2} = 4\\text{ jam} \\text{ dan waktu efektif } 8\\text{ jam}$' },
-      { id: 'C', text: '$T_{1/2} = 8\\text{ jam} \\text{ dan waktu efektif } 12\\text{ jam}$' },
-      { id: 'D', text: '$T_{1/2} = 4\\text{ jam} \\text{ dan waktu efektif } 16\\text{ jam}$' },
-      { id: 'E', text: '$T_{1/2} = 6\\text{ jam} \\text{ dan waktu efektif } 12\\text{ jam}$' },
     ],
     correctAnswer: 'A',
     solutionSteps: [
-      'Waktu paruh ($T_{1/2}$) adalah waktu yang dibutuhkan agar konsentrasi obat berkurang menjadi setengah konsentrasi awal ($100 \\to 50\\text{ mg/L}$), yaitu $4\\text{ jam}$.',
-      'Ambang MIC sebesar $12,5\\text{ mg/L}$ tercapai ketika:',
-      '$$100 \\cdot \\left(\\frac{1}{2}\\right)^{t/4} = 12,5 \\implies \\left(\\frac{1}{2}\\right)^{t/4} = \\frac{1}{8} = \\left(\\frac{1}{2}\\right)^3$$',
-      '$$\\frac{t}{4} = 3 \\implies t = 12\\text{ jam}$$',
+      'Pendapatan per hari dinyatakan oleh perkalian matriks penjualan $M$ dengan vektor kolom harga $\\begin{pmatrix} x \\\\ y \\end{pmatrix}$:',
+      '$$M \\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 10x + 15y \\\\ 10x + 12y \\\\ 12x + 8y \\\\ 20x + 15y \\\\ 15x + 4y \\end{pmatrix}_{5 \\times 1}$$',
+      'Untuk menjumlahkan seluruh elemen baris pendapatan tersebut, kalikan dari sebelah kiri dengan matriks baris unit $\\begin{pmatrix} 1 & 1 & 1 & 1 & 1 \\end{pmatrix}_{1 \\times 5}$:',
+      '$$\\text{Total} = \\begin{pmatrix} 1 & 1 & 1 & 1 & 1 \\end{pmatrix} \\begin{pmatrix} 10 & 15 \\\\ 10 & 12 \\\\ 12 & 8 \\\\ 20 & 15 \\\\ 15 & 4 \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\end{pmatrix}$$',
+      'Hasil operasi tersebut adalah $(10+10+12+20+15)x + (15+12+8+15+4)y = 67x + 54y$.',
     ],
   },
 
   // =========================================================================
-  // 32. Limit Fungsi Aljabar — Substitusi Langsung x -> 2
+  // 23. Fungsi Eksponensial — Grafik Eliminasi Antibiotik (Rentang 20-50)
   // =========================================================================
   {
-    id: 'siaga2-q32',
-    number: 32,
+    id: 'siaga2-q23',
+    number: 23,
+    packageId: 'siaga-2',
+    topic: 'Fungsi Eksponensial',
+    subtopic: 'Peluruhan Eksponensial Orde Pertama',
+    type: 'multiple',
+    svgType: 'antibiotic_decay',
+    stimulus:
+      'Perhatikan grafik eliminasi obat antibiotik dalam darah yang mengikuti model kinetika eliminasi orde pertama: $C(t) = C_0 e^{-kt}$.\n\n' +
+      'Berdasarkan kurva peluruhan pada grafik:\n' +
+      '• Saat $t = 0\\text{ jam}$, konsentrasi $C = 100{,}0\\text{ mg/L}$\n' +
+      '• Saat $t = 4\\text{ jam}$, konsentrasi $C = 50{,}0\\text{ mg/L}$ (waktu paruh $T_{1/2} = 4\\text{ jam}$)\n' +
+      '• Saat $t = 8\\text{ jam}$, konsentrasi $C = 25{,}0\\text{ mg/L}$\n' +
+      '• Saat $t = 12\\text{ jam}$, konsentrasi $C = 12{,}5\\text{ mg/L}$ (KHM/MIC)\n' +
+      '• Saat $t = 16\\text{ jam}$, konsentrasi $C = 6{,}25\\text{ mg/L}$',
+    questionText:
+      'Berdasarkan grafik, tentukan waktu saat konsentrasi obat dalam darah berada pada rentang 20 hingga 50 mg/L! (Jawaban benar lebih dari satu)',
+    options: [
+      { id: 'A', text: '4 jam.' },
+      { id: 'B', text: '5 jam.' },
+      { id: 'C', text: '10 jam.' },
+      { id: 'D', text: '15 jam.' },
+      { id: 'E', text: '2 jam.' },
+    ],
+    correctAnswer: ['A', 'B'],
+    solutionSteps: [
+      'Konsentrasi obat berada pada interval target $20 \\le C(t) \\le 50\\text{ mg/L}$.',
+      'Dari grafik peluruhan eksponensial orde pertama:',
+      '• Konsentrasi $C = 50\\text{ mg/L}$ dicapai tepat saat $t = 4\\text{ jam}$.',
+      '• Pada $t = 8\\text{ jam}$, konsentrasi adalah $25\\text{ mg/L} > 20$.',
+      '• Pada $t = 12\\text{ jam}$, konsentrasi turun menjadi $12{,}5\\text{ mg/L} < 20$.',
+      '• Konsentrasi $C = 20\\text{ mg/L}$ tercapai pada waktu $t \\approx 9{,}3\\text{ jam}$.',
+      'Rentang waktu saat konsentrasi berada antara $20$ dan $50\\text{ mg/L}$ adalah $4 \\le t \\le 9{,}3\\text{ jam}$.',
+      'Evaluasi opsi waktu yang diberikan:',
+      '• $t = 4\\text{ jam}$: $C = 50\\text{ mg/L}$ (memenuhi interval) $\\implies$ **Benar**.',
+      '• $t = 5\\text{ jam}$: $C \\approx 42\\text{ mg/L}$ (memenuhi interval) $\\implies$ **Benar**.',
+      '• $t = 10\\text{ jam}$: $C \\approx 17{,}7\\text{ mg/L} < 20$ (di luar batas) $\\implies$ Salah.',
+      '• $t = 15\\text{ jam}$: $C \\approx 7\\text{ mg/L} < 20$ (di luar batas) $\\implies$ Salah.',
+    ],
+  },
+
+  // =========================================================================
+  // 24. Limit Fungsi — Limit Aljabar x -> 2
+  // =========================================================================
+  {
+    id: 'siaga2-q24',
+    number: 24,
     packageId: 'siaga-2',
     topic: 'Limit Fungsi',
     subtopic: 'Limit Fungsi Aljabar',
@@ -1093,48 +936,57 @@ export const questionsData: Question[] = [
       'Nilai dari $\\lim_{x \\to 2} \\frac{x^2 - 3x + 5}{2x^3 + x^2 + x - 2}$ adalah ....',
     options: [
       { id: 'A', text: '$\\frac{3}{20}$' },
-      { id: 'B', text: '$\\frac{4}{20}$' },
-      { id: 'C', text: '$\\frac{5}{20}$' },
-      { id: 'D', text: '$\\frac{3}{22}$' },
-      { id: 'E', text: '$\\frac{5}{22}$' },
+      { id: 'B', text: '$\\frac{1}{5}$' },
+      { id: 'C', text: '$\\frac{1}{4}$' },
+      { id: 'D', text: '$\\frac{7}{20}$' },
+      { id: 'E', text: '$\\frac{2}{5}$' },
     ],
     correctAnswer: 'A',
     solutionSteps: [
-      'Substitusikan langsung $x = 2$ ke pembilang dan penyebut:',
-      '$$\\text{Pembilang} = 2^2 - 3(2) + 5 = 4 - 6 + 5 = 3$$',
-      '$$\\text{Penyebut} = 2(2)^3 + 2^2 + 2 - 2 = 2(8) + 4 + 0 = 20$$',
-      'Karena penyebut tidak nol ($20 \\neq 0$), maka nilai limitnya adalah $\\frac{3}{20}$.',
+      'Periksa apakah limit bernilai tentu dengan metode substitusi langsung $x = 2$:',
+      '• Hitung nilai pembilang pada $x = 2$:',
+      '$$2^2 - 3(2) + 5 = 4 - 6 + 5 = 3$$',
+      '• Hitung nilai penyebut pada $x = 2$:',
+      '$$2(2)^3 + (2)^2 + 2 - 2 = 2(8) + 4 + 2 - 2 = 16 + 4 = 20$$',
+      'Karena penyebut tidak sama dengan nol ($20 \\ne 0$), maka limit ini bukan bentuk tak tentu $\\frac{0}{0}$.',
+      'Sehingga nilai limit diperoleh langsung:',
+      '$$\\lim_{x \\to 2} \\frac{x^2 - 3x + 5}{2x^3 + x^2 + x - 2} = \\frac{3}{20}$$',
     ],
   },
 
   // =========================================================================
-  // 33. Polinomial — Hasil Bagi dan Sisa Pembagian Suku Banyak
+  // 25. Polinomial — Pembagian Horner 3x^3 - 5x^2 - 10 dibagi (x - 4)
   // =========================================================================
   {
-    id: 'siaga2-q33',
-    number: 33,
+    id: 'siaga2-q25',
+    number: 25,
     packageId: 'siaga-2',
     topic: 'Polinomial',
     subtopic: 'Pembagian Suku Banyak (Metode Horner)',
     type: 'single',
     questionText:
-      'Hasil bagi dan sisa pembagian suku banyak $3x^3 - 5x^2 - 10$ apabila dibagi oleh $(x - 4)$ berturut-turut adalah ....',
+      'Hasil bagi dan sisa suku banyak $3x^3 - 5x^2 - 10$ apabila dibagi oleh $(x - 4)$ adalah ....',
     options: [
-      { id: 'A', text: '$3x^2 + 8x + 6 \\text{ dan } 22$' },
-      { id: 'B', text: '$3x^2 + 6x + 8 \\text{ dan } 22$' },
-      { id: 'C', text: '$3x^2 + 8x + 27 \\text{ dan } 102$' },
-      { id: 'D', text: '$3x^2 + 7x + 28 \\text{ dan } 102$' },
-      { id: 'E', text: '$3x^2 - 7x + 28 \\text{ dan } 102$' },
+      { id: 'A', text: '$3x^2 + 8x + 6$ dan $22$' },
+      { id: 'B', text: '$3x^2 + 6x + 8$ dan $22$' },
+      { id: 'C', text: '$3x^2 + 8x + 27$ dan $102$' },
+      { id: 'D', text: '$3x^2 + 7x + 28$ dan $102$' },
+      { id: 'E', text: '$3x^2 + 7x + 26$ dan $94$' },
     ],
     correctAnswer: 'D',
     solutionSteps: [
-      'Tuliskan suku banyak secara lengkap dengan koefisien $x^1 = 0$: $P(x) = 3x^3 - 5x^2 + 0x - 10$.',
-      'Gunakan metode Horner dengan pembagi $x = 4$ pada koefisien $[3, -5, 0, -10]$:',
-      '• Koefisien $x^2$: turunkan $3$.',
-      '• Koefisien $x^1$: $3 \\times 4 + (-5) = 12 - 5 = 7$.',
-      '• Konstanta hasil bagi: $7 \\times 4 + 0 = 28$.',
-      '• Sisa pembagian: $28 \\times 4 + (-10) = 112 - 10 = 102$.',
-      'Jadi, hasil baginya adalah $3x^2 + 7x + 28$ dan sisanya adalah $102$.',
+      'Tulis suku banyak dalam urutan derajat menurun lengkap beserta koefisien $0$ pada suku $x^1$:',
+      '$$P(x) = 3x^3 - 5x^2 + 0x - 10$$',
+      'Pembagi adalah $(x - 4)$, sehingga nilai pembuat nol pembagi adalah $x = 4$.',
+      'Lakukan pembagian sintetis Horner:',
+      '$$\\begin{array}{c|rrrr} 4 & 3 & -5 & 0 & -10 \\\\ & & 12 & 28 & 112 \\\\ \\hline & 3 & 7 & 28 & 102 \\end{array}$$',
+      'Penjabaran langkah:',
+      '• Turunkan koefisien pertama: $3$',
+      '• Kalikan $3$ dengan $4 = 12$, jumlahkan: $-5 + 12 = 7$',
+      '• Kalikan $7$ dengan $4 = 28$, jumlahkan: $0 + 28 = 28$',
+      '• Kalikan $28$ dengan $4 = 112$, jumlahkan: $-10 + 112 = 102$ (Sisa)',
+      'Koefisien hasil bagi berderajat dua adalah $3, 7, 28$:',
+      '$$\\text{Hasil bagi } H(x) = 3x^2 + 7x + 28, \\quad \\text{Sisa } S = 102$$',
     ],
   },
 ];

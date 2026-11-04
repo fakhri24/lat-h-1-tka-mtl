@@ -108,7 +108,7 @@ async function generatePdf() {
     await auditAndExportPdf(
       page,
       `http://localhost:${port}/?mode=pdf`,
-      '33-Soal-TKA-Matematika-Tingkat-Lanjut-Siaga-2.pdf',
+      '25-Soal-TKA-Matematika-Tingkat-Lanjut-Siaga-2.pdf',
       'siaga2'
     );
 
