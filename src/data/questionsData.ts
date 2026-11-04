@@ -279,11 +279,64 @@ export const questionsData: Question[] = [
   },
 
   // =========================================================================
-  // 9. Matriks — Penjualan Koperasi Hari Senin
+  // 9. Matriks — Determinan Matriks & Aturan Cramer (Hari Rabu)
   // =========================================================================
   {
     id: 'siaga2-q9',
     number: 9,
+    packageId: 'siaga-2',
+    topic: 'Matriks',
+    subtopic: 'Determinan Matriks & Aturan Cramer',
+    type: 'single',
+    stimulus:
+      'Suatu koperasi menjual buku tulis, pena, dan penggaris kepada anggota dan nonanggota. Data banyak barang yang dibeli pada hari Senin dan daftar harga (dalam ribuan rupiah) disajikan dalam matriks $\\text{Barang} = \\begin{bmatrix} 12 & 10 & 6 \\\\ 15 & 11 & 9 \\end{bmatrix}$ (baris: Anggota, Nonanggota; kolom: Buku tulis, Pena, Penggaris) dan $\\text{Harga} = \\begin{bmatrix} 4 & 5 \\\\ 2 & 3 \\\\ 3 & 4 \\end{bmatrix}$ (kolom: Anggota, Nonanggota). Pada hari Rabu, total penjualan buku tulis ($x$) dan pena ($y$) kepada anggota sebesar $56$ ribu rupiah dan kepada nonanggota sebesar $79$ ribu rupiah.',
+    questionText:
+      'Nilai $x$ dan $y$ berdasarkan aturan determinan Cramer adalah ....',
+    options: [
+      {
+        id: 'A',
+        text: '$x = \\frac{\\begin{vmatrix} 56 & 2 \\\\ 79 & 3 \\end{vmatrix}}{\\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix}} = 5 \\text{ dan } y = \\frac{\\begin{vmatrix} 4 & 56 \\\\ 5 & 79 \\end{vmatrix}}{\\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix}} = 18$',
+      },
+      {
+        id: 'B',
+        text: '$x = \\frac{\\begin{vmatrix} 2 & 56 \\\\ 3 & 79 \\end{vmatrix}}{\\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix}} = -5 \\text{ dan } y = \\frac{\\begin{vmatrix} 56 & 4 \\\\ 79 & 5 \\end{vmatrix}}{\\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix}} = -18$',
+      },
+      {
+        id: 'C',
+        text: '$x = \\frac{\\begin{vmatrix} 56 & 4 \\\\ 79 & 5 \\end{vmatrix}}{\\begin{vmatrix} 4 & 5 \\\\ 2 & 3 \\end{vmatrix}} = 18 \\text{ dan } y = \\frac{\\begin{vmatrix} 2 & 56 \\\\ 3 & 79 \\end{vmatrix}}{\\begin{vmatrix} 4 & 5 \\\\ 2 & 3 \\end{vmatrix}} = 5$',
+      },
+      {
+        id: 'D',
+        text: '$x = \\frac{\\begin{vmatrix} 56 & 3 \\\\ 79 & 2 \\end{vmatrix}}{\\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix}} = 8 \\text{ dan } y = \\frac{\\begin{vmatrix} 4 & 56 \\\\ 5 & 79 \\end{vmatrix}}{\\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix}} = 12$',
+      },
+      {
+        id: 'E',
+        text: '$x = \\frac{\\begin{vmatrix} 56 & 2 \\\\ 79 & 3 \\end{vmatrix}}{\\begin{vmatrix} 4 & 3 \\\\ 5 & 2 \\end{vmatrix}} = 10 \\text{ dan } y = \\frac{\\begin{vmatrix} 4 & 56 \\\\ 5 & 79 \\end{vmatrix}}{\\begin{vmatrix} 4 & 3 \\\\ 5 & 2 \\end{vmatrix}} = 8$',
+      },
+    ],
+    correctAnswer: 'A',
+    solutionSteps: [
+      'Identifikasi harga satuan barang dari matriks $\\text{Harga} = \\begin{bmatrix} 4 & 5 \\\\ 2 & 3 \\\\ 3 & 4 \\end{bmatrix}$ di mana kolom 1 adalah Anggota dan kolom 2 adalah Nonanggota:',
+      '• Baris 1 (Buku Tulis): Anggota $= 4$, Nonanggota $= 5$',
+      '• Baris 2 (Pena): Anggota $= 2$, Nonanggota $= 3$',
+      'Susun sistem persamaan linear transaksi hari Rabu ($x$ = banyak buku tulis, $y$ = banyak pena):',
+      '$$\\begin{cases} 4x + 2y = 56 \\\\ 5x + 3y = 79 \\end{cases} \\iff \\begin{bmatrix} 4 & 2 \\\\ 5 & 3 \\end{bmatrix} \\begin{bmatrix} x \\\\ y \\end{bmatrix} = \\begin{bmatrix} 56 \\\\ 79 \\end{bmatrix}$$',
+      'Berdasarkan aturan Cramer, hitung determinan utama $D$:',
+      '$$D = \\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix} = (4)(3) - (2)(5) = 12 - 10 = 2$$',
+      'Ganti kolom pertama dengan vektor hasil $\\begin{bmatrix} 56 \\\\ 79 \\end{bmatrix}$ untuk mencari nilai $x$:',
+      '$$x = \\frac{D_x}{D} = \\frac{\\begin{vmatrix} 56 & 2 \\\\ 79 & 3 \\end{vmatrix}}{\\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix}} = \\frac{(56)(3) - (2)(79)}{2} = \\frac{168 - 158}{2} = \\frac{10}{2} = 5$$',
+      'Ganti kolom kedua dengan vektor hasil $\\begin{bmatrix} 56 \\\\ 79 \\end{bmatrix}$ untuk mencari nilai $y$:',
+      '$$y = \\frac{D_y}{D} = \\frac{\\begin{vmatrix} 4 & 56 \\\\ 5 & 79 \\end{vmatrix}}{\\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix}} = \\frac{(4)(79) - (56)(5)}{2} = \\frac{316 - 280}{2} = \\frac{36}{2} = 18$$',
+      'Jadi, opsi yang tepat adalah **A**.',
+    ],
+  },
+
+  // =========================================================================
+  // 10. Matriks — Penjualan Koperasi Hari Senin
+  // =========================================================================
+  {
+    id: 'siaga2-q10',
+    number: 10,
     packageId: 'siaga-2',
     topic: 'Matriks',
     subtopic: 'Perkalian Matriks dalam Konteks Kontekstual',
@@ -317,48 +370,6 @@ export const questionsData: Question[] = [
       'Total pendapatan hari Senin dari kedua kelompok:',
       '$$\\text{Total Pendapatan} = \\text{Rp}68.000 + \\text{Rp}108.000 = \\text{Rp}176.000,00$$',
       'Dalam format matriks baris dan kolom:\n$$\\begin{pmatrix} 12 & 10 \\end{pmatrix}\\begin{pmatrix} 4 \\\\ 2 \\end{pmatrix} + \\begin{pmatrix} 15 & 11 \\end{pmatrix}\\begin{pmatrix} 5 \\\\ 3 \\end{pmatrix} = 68 + 108 = 176\\text{ (ribu rupiah)}$$',
-    ],
-  },
-
-  // =========================================================================
-  // 10. Matriks — Aturan Cramer Hari Rabu
-  // =========================================================================
-  {
-    id: 'siaga2-q10',
-    number: 10,
-    packageId: 'siaga-2',
-    topic: 'Matriks',
-    subtopic: 'Aturan Determinan Cramer',
-    type: 'single',
-    stimulus:
-      'Pada hari Rabu, anggota koperasi membeli buku tulis dan pena dengan total pembayaran $56$ (ribu rupiah), sedangkan nonanggota koperasi membeli buku tulis dan pena dengan total pembayaran $79$ (ribu rupiah).\n\n' +
-      'Harga satuan buku tulis dan pena:\n' +
-      '• Anggota: Buku tulis $= 4$ ribu, Pena $= 2$ ribu\n' +
-      '• Nonanggota: Buku tulis $= 5$ ribu, Pena $= 3$ ribu\n\n' +
-      'Variabel $x$ menyatakan banyak buku tulis yang terjual dan $y$ menyatakan banyak pena yang terjual.',
-    questionText:
-      'Berdasarkan data tersebut, nilai $x$ dan $y$ yang memenuhi sistem persamaan adalah ....',
-    options: [
-      { id: 'A', text: '$x = 5$ dan $y = 18$' },
-      { id: 'B', text: '$x = 6$ dan $y = 16$' },
-      { id: 'C', text: '$x = 7$ dan $y = 14$' },
-      { id: 'D', text: '$x = 8$ dan $y = 12$' },
-      { id: 'E', text: '$x = 9$ dan $y = 10$' },
-    ],
-    correctAnswer: 'A',
-    solutionSteps: [
-      'Susun sistem persamaan linear dari informasi transaksi hari Rabu:',
-      '$$\\begin{cases} 4x + 2y = 56 \\\\ 5x + 3y = 79 \\end{cases}$$',
-      'Tuliskan dalam persamaan matriks koefisien: $\\begin{pmatrix} 4 & 2 \\\\ 5 & 3 \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 56 \\\\ 79 \\end{pmatrix}$.',
-      'Hitung determinan matriks utama $D$:',
-      '$$D = \\begin{vmatrix} 4 & 2 \\\\ 5 & 3 \\end{vmatrix} = 4(3) - 2(5) = 12 - 10 = 2$$',
-      'Hitung determinan variabel $x$ ($D_x$):',
-      '$$D_x = \\begin{vmatrix} 56 & 2 \\\\ 79 & 3 \\end{vmatrix} = 56(3) - 2(79) = 168 - 158 = 10$$',
-      '$$x = \\frac{D_x}{D} = \\frac{10}{2} = 5$$',
-      'Hitung determinan variabel $y$ ($D_y$):',
-      '$$D_y = \\begin{vmatrix} 4 & 56 \\\\ 5 & 79 \\end{vmatrix} = 4(79) - 56(5) = 316 - 280 = 36$$',
-      '$$y = \\frac{D_y}{D} = \\frac{36}{2} = 18$$',
-      'Jadi, diperoleh $x = 5$ (banyak buku tulis) dan $y = 18$ (banyak pena).',
     ],
   },
 

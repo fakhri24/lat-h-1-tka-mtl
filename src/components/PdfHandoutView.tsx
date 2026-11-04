@@ -11,8 +11,8 @@ interface PageSpec {
 }
 
 const PAGES_SIAGA_2: PageSpec[] = [
-  { pageNumber: 1, leftNums: [1, 2, 3, 4], rightNums: [5, 6, 7] },
-  { pageNumber: 2, leftNums: [8, 9, 10], rightNums: [11, 12, 13] },
+  { pageNumber: 1, leftNums: [1, 2, 3, 4], rightNums: [5, 6, 7, 8] },
+  { pageNumber: 2, leftNums: [9, 10], rightNums: [11, 12, 13] },
   { pageNumber: 3, leftNums: [14, 15, 16], rightNums: [17, 18] },
   { pageNumber: 4, leftNums: [19, 20, 21], rightNums: [22, 23, 24, 25] },
 ];
